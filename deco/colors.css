@@ -1,0 +1,53 @@
+* {
+    margin : 0;
+    padding : 0;
+    text-decoration : none;
+    font-family : 'Gothic A1';
+}
+
+body { 
+    background-color : #F7F6F2;
+}
+
+content {
+    display : block;
+    margin-top : 20vh;
+    padding : 0 25vw; 
+}
+
+palette {
+    display : block;
+    margin : auto 20%;
+}
+
+color {
+    display : inline-block;
+    position : relative;
+    text-align : justify;
+    width : 100%;
+    height : 30px;
+    padding-top : 30px;
+}
+text:hover {
+    background-color : #00000022;
+    color : black;
+    padding : 5 10 2 2;
+}
+
+text {
+    position : absolute;
+    bottom : 0;
+    color : #00000000;
+    background-color : #00000000;
+    padding : 0;
+    border-top-right-radius : 7px;
+}
+
+color#a{ background-color : #F0E5CF;}
+color#b{ background-color : #F7F6F2;}
+color#c{ background-color : #C8C6C6;}
+color#d{ background-color : #4B6587;}
+
+p {
+    margin-top : 5em;
+}
