@@ -43,9 +43,7 @@ h1 {display:inline-block;}
   align-self: center;
 }
 .logo {
-  position : absolute;
-  left : 50%;
-  transform : translateX(-50%);
+  position :relative;
 }
 
 input#top_search {
@@ -102,12 +100,19 @@ input#top_search {
   display : inline-block;
 }
 
+.nav_bar {
+  display : inline-block;
+  position : relative;
+  width : 400px;
+}
+
 
 .nav_bar ul {
-  padding : 10px 10%;
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
+  display : flex;
+  position :relative;
+  width : 100%;
+  justify-content: space-between;
+
 }
 .nav_bar ul li {
   display : inline-block;
@@ -127,4 +132,16 @@ input#top_search {
   justify-content: center;
   background-color : #E0A467;
   width :
+}
+
+
+footer {
+  display : grid;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  height : 100px;
+  color : gray;
+  margin : 100px;
 }
