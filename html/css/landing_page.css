@@ -15,6 +15,51 @@ body::-webkit-scrollbar { /* WebKit */
     height: 0;
 }
 
+#loading {
+  display : flex;
+  position : absolute;
+  background-color: #E0A467;
+  z-index : 1000;
+  top : 0;
+  left : 0;
+  width : 100vw;
+  height : 100vh;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Amatic SC', cursive;
+  text-shadow: 0 0.5em 10px white;
+}
+
+#loading::before {
+  content : "blog of";
+  font-size: 30px;
+  display: inline-block;
+  margin-right: 10px;
+  text-align: left;
+  transition : all 1s ease-in-out 1s;
+  transform: translate(-100%, 70%);
+}
+
+#loading.active::before {
+  transform : translate(0%, 70%);
+}
+
+#loading::after {
+  content :"2ood";
+  font-size: 100px;
+  transition : all 1s ease-in-out 1s;
+  transform: translateX(50%);
+}
+
+#loading.active::after {
+  transform : translate(0);
+}
+
+#loading.done {
+  opacity: 0;
+  transition : all 1s ease;
+}
+
 #logined {
   display:none;
 }
@@ -25,7 +70,7 @@ h1 {display:inline-block;}
 
 .top_bar {
   background-color: #00000000;
-  color : #AD7F50;
+  color : #E0A467;
   position : fixed;
   z-index : 10;
   width : 100vw;
@@ -44,8 +89,10 @@ h1 {display:inline-block;}
 }
 .logo {
   position :relative;
+  color : white;
 }
-
+/* search bar is deprecated*/
+/*
 input#top_search {
   padding: 5px;
   position:relative;
@@ -64,13 +111,20 @@ input#top_search {
   display: inline-block;
   bottom:0;
 }
-
+*/
+.space_box#vw15 {
+  content : ""
+  visibility: hidden;
+  position : relative;
+  width : 15vw;
+  max-width: 150px;
+}
 
 
 .underline::before {
   content : ' ';
   position : absolute;
-  background-color: #AD7F50;
+  background-color: #E0A467;
   top:26px;
   left:0;
   width:0%;
@@ -88,7 +142,7 @@ input#top_search {
 
 .log_status {
   display : inline-block;
-  width : 120px;
+  width : 140px;
 }
 
 .log_status ul {
@@ -103,7 +157,7 @@ input#top_search {
 .nav_bar {
   display : inline-block;
   position : relative;
-  width : 400px;
+  width : 300px;
 }
 
 
