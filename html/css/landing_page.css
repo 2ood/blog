@@ -5,8 +5,12 @@
   font-family: 'Roboto', sans-serif;
 }
 a:visited {color : inherit;}
-
+html {
+  height: 100%;
+}
 body {
+  height : 100%;
+  min-height: 100%;
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none;  /* Internet Explorer 10+ */
 }
@@ -14,7 +18,8 @@ body::-webkit-scrollbar { /* WebKit */
     width: 0;
     height: 0;
 }
-
+/* loading screen is deprecated*/
+/*
 #loading {
   display : flex;
   position : absolute;
@@ -59,6 +64,7 @@ body::-webkit-scrollbar { /* WebKit */
   opacity: 0;
   transition : all 1s ease;
 }
+*/
 
 #logined {
   display:none;
@@ -180,22 +186,28 @@ input#top_search {
   position : relative;
   display: flex;
   font-size: 70px;
-  height : 100vh;
+  height : 100%;
+  min-height: 100%;
   width : 40%;
   align-items : center;
   justify-content: center;
   background-color : #E0A467;
-  width :
 }
 
-
 footer {
-  display : grid;
-  position: relative;
+  display : block;
+  float : right;
+  position: absolute;
+  bottom : 10px;
+  right : 10%;
   align-items: center;
   justify-content: center;
-  text-align: center;
+  text-align: right;
+  line-height: 1.5em;
   height : 100px;
   color : gray;
-  margin : 100px;
+}
+
+footer a:hover {
+  text-decoration: underline;
 }
