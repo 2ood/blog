@@ -1,0 +1,62 @@
+body {
+  display: block;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  font-family : 'Mulish', sans-serif;
+  background-repeat: no-repeat;
+  background-size:cover;
+  background-image : url("https://source.unsplash.com/random/1920×1080");
+}
+
+form h1 {
+
+  text-align: center;
+  display: block;
+  font-size: 4em;
+  margin-bottom : 20px;
+  color : #E0A467;
+}
+form {
+  background-color: white;
+  padding : 20px;
+  display: block;
+  width : 50vw;
+  max-width : 400px;
+  position: absolute;
+  justify-content: center;
+  text-align: center;
+  align-content: center;
+  top : 50%;
+  left : 50%;
+  transform: translateX(-50%) translateY(-50%);
+  border : 3px #E0A467 solid;
+  border-radius: 5px;
+  box-shadow: 0 0 10px white;
+}
+
+input {
+  display: block;
+  margin-bottom : 10px;
+  width : 100%;
+  height : 2em;
+  font-size: 1.2em;
+  border : none;
+  border-bottom: 2px #E0A467 solid;
+}
+button {
+  width : 100%;
+  height : 4em;
+  background-color: #E0A467;
+  border : none;
+  border-radius: 5px;
+}
+button:active {
+  background-color: white;
+  color : #E0A467;
+}
+
+#login_error {
+  margin-top : 10px;
+  color : red;
+}

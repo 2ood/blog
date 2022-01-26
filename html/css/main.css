@@ -1,0 +1,78 @@
+@import "util/button.css";
+@import "util/footer.css";
+@import "util/uderline.css";
+@import "font.css";
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+
+* {
+  margin :0;
+  padding : 0;
+  box-sizing: border-box;
+  text-decoration : none;
+  font-family: 'Roboto', sans-serif;
+}
+.hidden{display:none;}
+a:visited {color : inherit;}
+html {height: 100%;}
+body {
+  height : 100%;
+  min-height: 100%;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+}
+body::-webkit-scrollbar { /* WebKit */
+    width: 0;
+    height: 0;
+}
+
+p {font-family : 'Mulish', sans-serif;}
+
+ul li {position : relative;}
+
+h1 {display:inline-block;}
+
+.top_bar {
+  background-color: #00000000;
+  color : #E0A467;
+  position : fixed;
+  z-index : 10;
+  width : 100vw;
+  top : 0;
+} /* wrapper for top bar sticked to the top, following scroll*/
+
+.logo_bar {
+  display: flex;
+  position : relative;
+  justify-content: space-between;
+  align-items: center;
+  padding : 10px 10%;
+  text-align: center;
+  height : 50px;
+  align-self: center;
+}
+.logo {
+  position :relative;
+  color : white;
+}
+
+.log_status {
+  display : inline-block;
+  width : 140px;
+}
+
+.log_status ul, .nav_bar ul{
+ display : flex;
+ position :relative;
+ width : 100%;
+ justify-content: space-between;
+
+}
+
+.log_status ul li, .nav_bar ul li {
+  display : inline-block;
+}
+
+.nav_bar {
+  display : inline-block;
+  width : 300px;
+}

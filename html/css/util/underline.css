@@ -1,0 +1,18 @@
+.underline::before {
+  content : ' ';
+  position : absolute;
+  background-color: #E0A467;
+  top:26px;
+  left:0;
+  width:0%;
+  height :2px;
+  transition: width 0.3s ease-out;
+}
+
+.underline:hover::before {
+  width:100%;
+}
+
+.underline:hover::after {
+  width:100%;
+}

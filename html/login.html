@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="kr" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="css/main.css"/>
+    <link rel="stylesheet" href="css/login.css"/>
+    <link rel="shortcut icon" href="flight_takeoff.svg"/><!-- from google fonts-->
+    <title>2ood's blog</title>
+  </head>
+  <body>
+    <form class="login" method = "post">
+      <h1>login</h1>
+      <input
+      required
+      type="text"
+      maxlength="15"
+      placeholder="ID"
+      name ="username"/>
+      <input
+      required
+      type="password"
+      placeholder="비밀번호"
+      name ="password"/>
+      <button type="submit">LOGIN</button>
+      <button type="button" onclick="location.href='signup.html'">SIGN UP</button>
+      <div class="hidden" id="login_error">login failed.</div>
+    </form><!--.login-->
+
+    <footer>
+      <div> background sited: <a href="https://unsplash.com">Unsplash.</a></div>
+      <div> developed by <a href="https://github.com/2ood">2ood.</a></div>
+      <div> MIT licensed. 2022</div>
+
+    </footer>
+    <script src="script/login.js"></script>
+  </body>
+</html>

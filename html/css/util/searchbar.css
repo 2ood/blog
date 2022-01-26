@@ -1,0 +1,18 @@
+input#top_search {
+  padding: 5px;
+  position:relative;
+  bottom:0;
+  background-color: inherit;
+  border: none;
+  outline : none;
+  float:left;
+}
+.search {
+  position : relative;
+  vertical-align: middle;
+}
+.material-icons#search {
+  position : relative;
+  display: inline-block;
+  bottom:0;
+}

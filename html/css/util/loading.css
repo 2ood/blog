@@ -1,0 +1,44 @@
+#loading {
+  display : flex;
+  position : absolute;
+  background-color: #E0A467;
+  z-index : 1000;
+  top : 0;
+  left : 0;
+  width : 100vw;
+  height : 100vh;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Amatic SC', cursive;
+  text-shadow: 0 0.5em 10px white;
+}
+
+#loading::before {
+  content : "blog of";
+  font-size: 30px;
+  display: inline-block;
+  margin-right: 10px;
+  text-align: left;
+  transition : all 1s ease-in-out 1s;
+  transform: translate(-100%, 70%);
+}
+
+#loading.active::before {
+  transform : translate(0%, 70%);
+}
+
+#loading::after {
+  content :"2ood";
+  font-size: 100px;
+  transition : all 1s ease-in-out 1s;
+  transform: translateX(50%);
+}
+
+#loading.active::after {
+  transform : translate(0);
+}
+
+#loading.done {
+  opacity: 0;
+  transition : all 1s ease;
+}
