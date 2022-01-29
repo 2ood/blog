@@ -1,7 +1,7 @@
 #loading {
   display : flex;
   position : absolute;
-  background-color: #E0A467;
+  background-color: var(--primary);
   z-index : 1000;
   top : 0;
   left : 0;

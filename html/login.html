@@ -10,28 +10,18 @@
   <body>
     <form class="login" method = "post">
       <h1>login</h1>
-      <input
-      required
-      type="text"
-      maxlength="15"
-      placeholder="ID"
-      name ="username"/>
-      <input
-      required
-      type="password"
-      placeholder="비밀번호"
-      name ="password"/>
+      <input required name ="username" placeholder="ID" type="text" maxlength="15"/>
+      <input required name ="password" placeholder="비밀번호" type="password"/>
       <button type="submit">LOGIN</button>
       <button type="button" onclick="location.href='signup.html'">SIGN UP</button>
       <div class="hidden" id="login_error">login failed.</div>
     </form><!--.login-->
 
-    <footer>
-      <div> background sited: <a href="https://unsplash.com">Unsplash.</a></div>
-      <div> developed by <a href="https://github.com/2ood">2ood.</a></div>
-      <div> MIT licensed. 2022</div>
 
-    </footer>
+      <footer>
+        <div> background sited: <a href="https://unsplash.com">Unsplash.</a></div>
+      </footer>
+      <script src="script/footer.js"></script>
     <script src="script/login.js"></script>
   </body>
 </html>

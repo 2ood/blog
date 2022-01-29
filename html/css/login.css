@@ -15,7 +15,7 @@ form h1 {
   display: block;
   font-size: 4em;
   margin-bottom : 20px;
-  color : #E0A467;
+  color : var(--primary);
 }
 form {
   background-color: white;
@@ -31,7 +31,7 @@ form {
   top : 50%;
   left : 50%;
   transform: translateX(-50%) translateY(-50%);
-  border : 3px #E0A467 solid;
+  border : 3px var(--primary) solid;
   border-radius: 5px;
   box-shadow: 0 0 10px white;
 }
@@ -43,7 +43,7 @@ input {
   height : 2em;
   font-size: 1.2em;
   border : none;
-  border-bottom: 2px #E0A467 solid;
+  border-bottom: 2px var(--primary) solid;
 }
 
 

@@ -1,12 +1,4 @@
 
-.space_box#vw15 {
-  content : ""
-  visibility: hidden;
-  position : relative;
-  width : 15vw;
-  max-width: 150px;
-}
-
 .left {
   z-index : 0;
   font-family: 'Varela', sans-serif;
@@ -19,5 +11,5 @@
   width : 40%;
   align-items : center;
   justify-content: center;
-  background-color : #E0A467;
+  background-color : var(--primary);
 }

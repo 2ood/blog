@@ -1,8 +1,15 @@
 @import "util/button.css";
 @import "util/footer.css";
-@import "util/uderline.css";
+@import "util/underline.css";
 @import "font.css";
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+
+:root {
+  --primary: #E0A467;
+  --secondary: white;
+  --accent : #6495ed; //#283618;
+  --transparent :#00000000;
+}
 
 * {
   margin :0;
@@ -12,7 +19,7 @@
   font-family: 'Roboto', sans-serif;
 }
 .hidden{display:none;}
-a:visited {color : inherit;}
+a, a:visited {color :inherit; }
 html {height: 100%;}
 body {
   height : 100%;
@@ -31,14 +38,22 @@ ul li {position : relative;}
 
 h1 {display:inline-block;}
 
-.top_bar {
-  background-color: #00000000;
-  color : #E0A467;
+#top_bar {
+  background-color: var(--transparent);
+  color : var(--primary);
   position : fixed;
   z-index : 10;
   width : 100vw;
   top : 0;
 } /* wrapper for top bar sticked to the top, following scroll*/
+
+#top_bar .space_box#vw15 {
+  content : ""
+  visibility: hidden;
+  position : relative;
+  width : 15vw;
+  max-width: 150px;
+}
 
 .logo_bar {
   display: flex;
@@ -52,7 +67,8 @@ h1 {display:inline-block;}
 }
 .logo {
   position :relative;
-  color : white;
+  color : var(--secondary);
+  text-shadow : -1px 0 var(--primary), 0 1px var(--primary), 1px 0 var(--primary), 0px -1px var(--primary);
 }
 
 .log_status {
@@ -75,4 +91,23 @@ h1 {display:inline-block;}
 .nav_bar {
   display : inline-block;
   width : 300px;
+}
+
+#to_top {
+  background-color: var(--primary);
+  position : fixed;
+  display:inline-block;
+  border-radius: 50%;
+  text-align: center;
+  align-content: center;
+  justify-content: center;
+  bottom : 7%;
+  right : 5%;
+  width : 50px;
+  height : 50px;
+  transition : all .3s ease-in-out;
+}
+#to_top:hover {
+  background : var(--accent);
+  cursor: pointer;
 }
