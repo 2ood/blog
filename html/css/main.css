@@ -40,11 +40,11 @@ h1 {display:inline-block;}
   top : 0;
 } /* wrapper for top bar sticked to the top, following scroll*/
 
-#top_bar .space_box#vw15 {
+#top_bar .space_box#vw10 {
   content : ""
   visibility: hidden;
   position : relative;
-  width : 15vw;
+  width : 10vw;
   max-width: 150px;
 }
 

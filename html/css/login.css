@@ -1,3 +1,5 @@
+@import 'module/error.css';
+
 body {
   display: block;
   justify-content: center;
@@ -44,10 +46,4 @@ input {
   font-size: 1.2em;
   border : none;
   border-bottom: 2px var(--primary) solid;
-}
-
-
-#login_error {
-  margin-top : 10px;
-  color : red;
 }
