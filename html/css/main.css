@@ -9,6 +9,7 @@
   --secondary: white;
   --accent : #6495ed; //#283618;
   --transparent :#00000000;
+  --error : red;
 }
 
 * {

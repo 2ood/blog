@@ -1,7 +1,7 @@
 .underline::before {
   content : ' ';
   position : absolute;
-  background-color: var(--primary);
+  background-color: #E0A467;
   top:26px;
   left:0;
   width:0%;
