@@ -1,0 +1,8 @@
+:root {
+  --primary: #E0A467;
+  --secondary: white;
+  --accent : #6495ed; //#283618;
+  --transparent :#00000000;
+  --error : red;
+  --grayscale : #d3d3d3;
+}
