@@ -19,8 +19,9 @@
         </div><!--.head-->
         <div id="md">
           <?php
-          $Parsedown = new Parsedown();
+          include 'libs/Parsedown.php';
 
+          $Parsedown = new Parsedown();
           echo $Parsedown->text('# kyungmin');
            ?>
         </div><!--#md-->
