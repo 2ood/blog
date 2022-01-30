@@ -14,17 +14,12 @@
     <div id="content">
         <div class="head">
           <h1 id="title">lorem</h1>
-          <h6 class="grayscale-font" id="writer">2ood</h6>
-          <h6 class="grayscale-font" id="last-update">2022-01-01</h6>
+          <div class="clearbox"></div>
+          <h4 class="grayscale-font" id="writer">2ood</h4>
+          <h4 class="grayscale-font" id="last-update">2022-01-01</h4>
+          <div class="clearbox"></div>
         </div><!--.head-->
-        <div id="md">
-          <?php
-          include 'libs/Parsedown.php';
-
-          $Parsedown = new Parsedown();
-          echo $Parsedown->text('# kyungmin');
-           ?>
-        </div><!--#md-->
+        <div id="md"></div><!--#md-->
     </div><!--.content-->
     <span id="to_top"></span>
     <script src="html/script/module/to_top.js"></script>

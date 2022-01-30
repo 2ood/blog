@@ -8,5 +8,20 @@
 }
 
 #md {
+  padding : 15px;
+}
 
+.clearbox {
+  clear : both;
+}
+
+
+#writer {
+  display : inline-block;
+  float : left;
+}
+
+#last-update {
+  display : inline-block;
+  float : right;
 }
