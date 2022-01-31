@@ -53,6 +53,6 @@
 
 
   coder.href="coder.html";
-  notes.href="post.html";
+  notes.href="post_list.html";
   login.href="login.html";
   signup.href="signup.html";

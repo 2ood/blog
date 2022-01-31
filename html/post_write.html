@@ -13,14 +13,14 @@
     <div id="top_bar"></div><!--.top_bar-->
     <script src="script/module/top_bar.js"></script>
     <div id="content">
-        <div class="head">
-          <h1 id="title">loading..</h1>
-          <div class="clearbox"></div>
-          <h4 class="grayscale-font" id="writer">loading..</h4>
-          <h4 class="grayscale-font" id="last-update">loading..1</h4>
-          <div class="clearbox"></div>
-        </div><!--.head-->
-        <div id="md"></div><!--#md-->
+      <form class="post" method = "post">
+        <h1>login</h1>
+        <input required name ="username" placeholder="ID" type="text" maxlength="15"/>
+        <input required name ="password" placeholder="비밀번호" type="password"/>
+        <button type="submit">LOGIN</button>
+        <button type="button" onclick="location.href='signup.html'">SIGN UP</button>
+        <div class="hidden" id="error">login failed.</div>
+      </form><!--.login-->
     </div><!--.content-->
     <span id="to_top"></span>
     <script src="script/module/to_top.js"></script>
