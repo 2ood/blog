@@ -11,8 +11,8 @@ db.collection('posts').orderBy("LAST_UPDATE", "desc").get().then((snapshot)=>{
     const year = timestamp.getYear();
     const month = timestamp.getMonth();
     const date = timestamp.getDate();
-    const hours = timestamp.getHours()==0?"00":timestamp.getHours()
-    const minutes = timestamp.getMinutes()==0?"00":timestamp.getMinutes();
+    const hours = timestamp.getHours()<10?"0"+timestamp.getHours():timestamp.getHours()
+    const minutes = timestamp.getMinutes()<10?"0"+timestamp.getMinutes():timestamp.getMinutes();
     const today = new Date();
 
     let last_update = `${year+1900}/${month+1}/${date}`;

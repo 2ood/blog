@@ -28,7 +28,8 @@ const preview = document.querySelector("div.preview");
 const viewButton = document.querySelector("button[name='viewButton']");
 
 viewButton.addEventListener("click", (event)=>{
-  preview.innerHTML=marked.parse(markdown.value);
+  previewContent = markdown.value.split("\n").join("<br/>");
+  preview.innerHTML=marked.parse(previewContent);
   markdown.style.display=(markdown.style.display=="none")?"block":"none";
   preview.style.display=(preview.style.display=="none")?"block":"none";
   viewButton.textContent=(viewButton.textContent=="preview")?"back to edit mode":"preview";
@@ -48,7 +49,8 @@ if(isEditMode) {
           title.value=dat.TITLE;
           writer.value=dat.WRITER;
           summary.value=dat.SUMMARY;
-          markdown.value=dat.CONTENT;
+          const content = dat.CONTENT.split("\\n").join("\n");
+          markdown.value=content;
         } else {
           alert("doesn't exist!");
           window.location.href = './post_list.html';
