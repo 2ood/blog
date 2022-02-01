@@ -29,4 +29,17 @@ p {font-family : 'Mulish', sans-serif;}
 
 ul li {position : relative;}
 
-h1 {display:inline-block;}
+h1 {
+  display:inline-block;
+  margin-bottom : 10px;
+}
+
+#content {
+  margin : 0 20%;
+  margin-top : 100px;
+  position : relative;
+  justify-content: center;
+  border-radius: 5px;
+  padding : 5%;
+  font-family: 'Varela', sans-serif;
+}

@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="css/main.css"/>
-    <link rel="stylesheet" href="css/post.css"/>
+    <link rel="stylesheet" href="css/post_write.css"/>
     <link rel="shortcut icon" href="flight_takeoff.svg"/><!-- from google fonts-->
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-    <title>2OOD'S BLOG</title>
+    <title>write a new post - 2OOD'S BLOG</title>
   </head>
   <body>
     <!--<div id="loading"><br></div>-->
@@ -14,11 +14,13 @@
     <script src="script/module/top_bar.js"></script>
     <div id="content">
       <form class="post" method = "post">
-        <h1>login</h1>
-        <input required name ="username" placeholder="ID" type="text" maxlength="15"/>
-        <input required name ="password" placeholder="비밀번호" type="password"/>
-        <button type="submit">LOGIN</button>
-        <button type="button" onclick="location.href='signup.html'">SIGN UP</button>
+        <input required name ="TITLE" placeholder="type in title" type="text"/><br/>
+        <input required name ="WRITER" placeholder="writer" type="text"/></br>
+        <textarea required name ="SUMMARY" placeholder="one line summary" type="text"></textarea>
+        <textarea required name ="CONTENT" placeholder="write as markdown"></textarea>
+        <div class="preview" style="display:none;">asdfadf</div>
+        <button class="half" name ="viewButton" type="button">preview</button>
+        <button class="half" type="submit">upload</button>
         <div class="hidden" id="error">login failed.</div>
       </form><!--.login-->
     </div><!--.content-->
@@ -31,6 +33,6 @@
     <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-storage.js"></script>
-    <script src="script/post.js"></script>
+    <script src="script/post_write.js"></script>
   </body>
 </html>
