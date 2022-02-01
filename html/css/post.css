@@ -1,3 +1,14 @@
+.head .material-icons {
+  font-size: 2em;
+  float : right;
+  margin-left: 10px;
+}
+
+.material-icons:hover {
+  cursor: pointer;
+  color : var(--accent);
+}
+
 
 #content {
   margin : 0 20%;
@@ -24,5 +35,6 @@
 
 #last-update {
   display : inline-block;
-  float : right;
+  margin-left: 10px;
+  float : left;
 }
