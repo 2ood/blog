@@ -1,4 +1,9 @@
-#error {
+.error {
   margin-top : 10px;
   color : var(--error);
+}
+
+.okay {
+  margin-top : 10px;
+  color : var(--accent);
 }

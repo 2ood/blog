@@ -20,6 +20,7 @@ function onLoginSubmit(event){
   .catch((error) => {
     var errorCode = error.code;
     var errorMessage = error.message;
+    alert(`failed to login. error(${errorCode}) : ${errorMessage}`);
   });
 
 }

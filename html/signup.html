@@ -11,19 +11,22 @@
     <form class="signup" method = "post">
       <h1>SIGN UP</h1>
       <input required name ="name" placeholder="이름" type="text"/>
-      <input required name ="username" placeholder="ID" type="text" maxlength="15"/>
-      <input required name ="password" placeholder="비밀번호" type="password"/>
-      <input required name ="password_check" placeholder="비밀번호 체크" type="password"/>
       <input required name ="email" placeholder="이메일" type="email"/>
-      <input required name ="date" placeholder="생년월일" type="date"/>
+      <input required name ="password" placeholder="비밀번호" type="password"/>
+      <input required name ="check" placeholder="비밀번호 체크" type="password"/>
       <button class="fill" type="submit">SIGN UP</button>
-      <div class="hidden" id="error">signup failed.</div>
+      <div class="hidden" id="message"></div>
     </form><!--.login-->
 
     <footer>
       <div> background sited: <a href="https://unsplash.com">Unsplash.</a></div>
     </footer>
     <script src="script/module/footer.js"></script>
-    <script src="script/login.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-storage.js"></script>
+    <script src="script/firestore_init.js"></script>
+    <script src="script/signup.js"></script>
   </body>
 </html>

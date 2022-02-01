@@ -15,15 +15,3 @@ const storage = app.storage();
 const auth = app.auth();
 
 auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL);
-
-app.auth().onAuthStateChanged((user) => {
-  if (user) {
-    document.getElementById("login").style.display="flex";
-    var uid = user.uid;
-    console.log("logined");
-
-  } else {
-    document.getElementById("logout").style.display="flex";
-        console.log("logout");
-  }
-});
