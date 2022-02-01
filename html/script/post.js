@@ -14,10 +14,8 @@ const app = firebase.initializeApp(firebaseConfig);
 const db = app.firestore();
 const storage = app.storage();
 
-console.log(params.get("id"));
 
 db.collection('posts').doc(params.get("id")).get().then((snapshot)=>{
-    console.log("here");
       if(snapshot.exists){
         const dat = snapshot.data()
         document.getElementById("title").innerHTML=dat.TITLE;
@@ -26,7 +24,11 @@ db.collection('posts').doc(params.get("id")).get().then((snapshot)=>{
         const date = dat.LAST_UPDATE.toDate();
         document.getElementById("last-update").innerHTML=`
         ${date.getYear()+1900}/${date.getMonth()+1}/${date.getDate()}`;
-        parseAndLoadMd(dat.CONTENT);
+
+
+        const content = makeItMultipleLine(dat.CONTENT);
+        parseAndLoadMd(content);
+
       } else {
         console.log("doesn't exist!");
       }
@@ -35,4 +37,8 @@ db.collection('posts').doc(params.get("id")).get().then((snapshot)=>{
 function parseAndLoadMd(rawMd){
   const md = document.getElementById("md");
   md.innerHTML = marked.parse(rawMd);
+}
+
+function makeItMultipleLine(string) {
+  return string.split("\\n").join("\n");
 }

@@ -9,6 +9,7 @@
 
 #md {
   padding : 15px;
+  white-space: pre-wrap;
 }
 
 .clearbox {
