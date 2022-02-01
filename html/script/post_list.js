@@ -36,13 +36,13 @@ db.collection('posts').get().then((snapshot)=>{
 
       <tr class="${doc.data().id}">
         <td>${doc.data().id}</td>
-        <td><a href="post.html?id=${doc.data().TITLE}">${doc.data().TITLE}</a></td>
+        <td><a href="post.html?id=${doc.data().TITLE}">${doc.data().TITLE}</br>
+        <span class="grayscale-font">${doc.data().SUMMARY}</span></a></td>
         <td>${doc.data().WRITER}</td>
         <td>${last_update}</td>
       </tr>
 
     `;
-    console.dir(doc.data().LAST_UPDATE);
   });
 });
 
