@@ -14,8 +14,8 @@ const app = firebase.initializeApp(firebaseConfig);
 const db = app.firestore();
 const storage = app.storage();
 
-
 db.collection('posts').doc(params.get("id")).get().then((snapshot)=>{
+
       if(snapshot.exists){
         const dat = snapshot.data()
         document.getElementById("title").innerHTML=dat.TITLE;

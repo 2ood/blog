@@ -1,4 +1,7 @@
 @import "../module/button.css";
+@import "../module/error.css";
 @import "../module/footer.css";
 @import "../module/loading.css";
 @import "../module/searchbar.css";
+@import "../module/top_bar.css";
+@import "../module/to_top.css";

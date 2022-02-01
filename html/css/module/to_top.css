@@ -1,0 +1,19 @@
+#to_top {
+  background-color: var(--primary);
+  position : fixed;
+  display:flex;
+  border-radius: 50%;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  bottom : 7%;
+  right : 5%;
+  width : 50px;
+  height : 50px;
+  box-shadow : 0 5px 5px var(--primary);
+  transition : all .3s ease-in-out;
+}
+#to_top:hover {
+  background : var(--accent);
+  cursor: pointer;
+}

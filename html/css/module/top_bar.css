@@ -1,0 +1,54 @@
+#top_bar {
+  background-color: var(--transparent);
+  color : var(--primary);
+  position : fixed;
+  z-index : 10;
+  width : 100vw;
+  top : 0;
+} /* wrapper for top bar sticked to the top, following scroll*/
+
+#top_bar .space_box#vw10 {
+  content : ""
+  visibility: hidden;
+  position : relative;
+  width : 10vw;
+  max-width: 150px;
+}
+
+.logo_bar {
+  display: flex;
+  position : relative;
+  justify-content: space-between;
+  align-items: center;
+  padding : 10px 10%;
+  text-align: center;
+  height : 50px;
+  align-self: center;
+}
+.logo {
+  position :relative;
+  color : var(--secondary);
+  text-shadow : -1px 0 var(--primary), 0 1px var(--primary), 1px 0 var(--primary), 0px -1px var(--primary);
+}
+
+.log_status {
+  display : inline-block;
+  width : 140px;
+}
+
+.log_status ul, .nav_bar ul{
+ display : flex;
+ position :relative;
+ width : 100%;
+ justify-content: space-between;
+
+}
+
+.log_status ul li, .nav_bar ul li {
+  display : inline-block;
+}
+
+.nav_bar {
+  display : inline-block;
+  width : 300px;
+}

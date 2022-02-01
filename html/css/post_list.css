@@ -5,20 +5,27 @@
   justify-content: center;
   border-radius: 5px;
   padding : 5%;
+  font-family: 'Varela', sans-serif;
 }
 
 #index td {
   min-width : 70px;
-  border-bottom : 1px solid;
+  border-bottom : 2px var(--primary) solid;
   text-align: center;
 }
 
 table {
   display :inline-table;
   text-align: center;
+  width : 100%;
 }
 
 td:nth-child(4n-2) {
   width : 60%;
   text-align : left;
+  padding : 0 1%;
+}
+
+table tr:nth-child(6n),tr:nth-child(6n-1),tr:nth-child(6n-2)   {
+  background-color : var(--grayscale);
 }
