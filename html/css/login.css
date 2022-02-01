@@ -47,3 +47,7 @@ input {
   border : none;
   border-bottom: 2px var(--primary) solid;
 }
+
+input:focus {
+  outline:none;
+}

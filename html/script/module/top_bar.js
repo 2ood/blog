@@ -23,9 +23,14 @@
     </div><!--.navbar-->
 
     <span class="log_status">
-      <ul id="logout">
-        <li><a href="#" id="login">LOGIN</a></li>
-        <li><a href="#" id="signup">SIGN UP</a></li>
+      <ul style="display:none;" id="logout">
+        <li><a href="#" id="loginHref">LOGIN</a></li>
+        <li><a href="#" id="signupHref">SIGN UP</a></li>
+      </ul>
+      <ul style="display:none;" id="login">
+        <li><a href="#" id="name"></a></li>
+        <li><a href="#" id="logout">LOGOUT</a></li>
+        <li><a href="#" id="profile"></a></li>
       </ul>
     </span><!--.log_status-->
   </div> <!--.logo_bar-->
@@ -48,8 +53,8 @@
   const coder = document.querySelector("a#coder");
   const notes = document.querySelector("#notes");
   const hobbies = document.querySelector("#hobbies");
-  const login = document.querySelector("#login");
-  const signup = document.querySelector("#signup");
+  const login = document.querySelector("#loginHref");
+  const signup = document.querySelector("#signupHref");
 
 
   coder.href="coder.html";

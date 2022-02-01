@@ -12,3 +12,6 @@ const firebaseConfig = {
 const app = firebase.initializeApp(firebaseConfig);
 const db = app.firestore();
 const storage = app.storage();
+const auth = app.auth();
+
+auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL);
