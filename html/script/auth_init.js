@@ -9,7 +9,7 @@ auth.onAuthStateChanged((user) => {
     const nameAnchor = document.querySelector("a#name");
     nameAnchor.textContent = name;
 
-    storage.child(`profile/${user.uid}.png`).getDownloadURL().then((url) => {
+    storage.ref(`profile/${user.uid}.png`).getDownloadURL().then((url) => {
       var img = document.querySelector("img#profilePic");
       img.setAttribute('src', url);
     })
