@@ -30,7 +30,7 @@
       <ul style="display:none;" id="login">
         <li><a href="#" id="name"></a></li>
         <li><a href="#" id="logout">LOGOUT</a></li>
-        <li><a href="#" id="profile"></a></li>
+        <li><a href="#" id="profile"><img id="profilePic"/></a></li>
       </ul>
     </span><!--.log_status-->
   </div> <!--.logo_bar-->
@@ -55,9 +55,16 @@
   const hobbies = document.querySelector("#hobbies");
   const login = document.querySelector("#loginHref");
   const signup = document.querySelector("#signupHref");
+  const logout = document.querySelector("#logout");
+  const nameAnchor = document.querySelector("a#name");
+  const profile = document.querySelector("a#profile");
+
+
 
 
   coder.href="coder.html";
   notes.href="post_list.html";
   login.href="login.html";
   signup.href="signup.html";
+  nameAnchor.href=`profile.html`;
+  profile.href=`profile.html`;

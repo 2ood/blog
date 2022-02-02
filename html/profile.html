@@ -2,55 +2,40 @@
 <html lang="kr" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="css/post_list.css"/>
     <link rel="stylesheet" href="css/main.css"/>
+    <link rel="stylesheet" href="css/profile.css"/>
     <link rel="shortcut icon" href="flight_takeoff.svg"/><!-- from google fonts-->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-storage.js"></script>
     <script src="script/firestore_init.js"></script>
-    <script src="script/auth_init.js"></script>
     <title>2OOD'S BLOG</title>
   </head>
   <body>
+    <!--<div id="loading"><br></div>-->
     <div id="top_bar"></div><!--.top_bar-->
     <script src="script/module/top_bar.js"></script>
     <div id="content">
-      <h1>POSTS</h1>
-      <button onclick="location.href='post_write.html'">Write</button>
-      <table id="table">
-        <tr id="index">
-           <td>No.</td>
-           <td>Title</td>
-           <td>Writer</td>
-           <td>last update</td>
-        </tr>
-        <tr class="loading">
-           <td>loading...</td>
-           <td>loading...</td>
-           <td>loading...</td>
-           <td>loading...</td>
-        </tr>
-        <tr class="loading">
-           <td>loading...</td>
-           <td>loading...</td>
-           <td>loading...</td>
-           <td>loading...</td>
-        </tr>
-      </table>
-      <div class="pagination">
-
-      </div>
-    </div>
-
-
-
+        <div class="head">
+          <h1 id="title">loading..</h1>
+          <div class="clearbox"></div>
+          <h4 class="grayscale-font" id="writer">loading..</h4>
+          <span class="material-icons grayscale-font" id="share">share</span>
+          <span class="material-icons grayscale-font" id="delete">delete</span>
+          <span class="material-icons grayscale-font" id="edit">edit</span>
+          <h4 class="grayscale-font" id="last-update">loading..</h4>
+          <div class="clearbox"></div>
+        </div><!--.head-->
+        <div id="md"></div><!--#md-->
+    </div><!--.content-->
     <span id="to_top"></span>
     <script src="script/module/to_top.js"></script>
     <footer></footer>
     <script src="script/module/footer.js"></script>
     <script src="script/main.js"></script>
-    <script src="script/post_list.js"></script>
+    <script src="script/profile.js"></script>
+    <script src="script/auth_init.js"></script>
   </body>
 </html>
