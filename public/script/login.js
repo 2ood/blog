@@ -14,7 +14,7 @@ function onLoginSubmit(event){
   .then((userCredential) => {
     // Signed in
     setTimeout(()=>{
-      window.location.href="landing_page.html";
+      window.location.href="index.html";
     },2000);
   })
   .catch((error) => {

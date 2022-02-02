@@ -41,7 +41,7 @@ function onSignupSubmit(event){
     };
     db.collection('users').doc(user.uid).set(docData).then((docRef) => {
       alert("User added successfully!");
-      window.location.href = './landing_page.html';
+      window.location.href = './index.html';
     })
     .catch((error) => {
       var errorCode = error.code;

@@ -45,3 +45,11 @@ function parseAndLoadMd(rawMd){
 function makeItMultipleLine(string) {
   return string.split("\\n").join("\n");
 }
+
+function onAuthLogined(user) {
+  onAuthLoginedTopBar(user);
+}
+
+function onAuthAnonymous() {
+  onAuthAnonymousTopBar();
+}
