@@ -1,9 +1,9 @@
 
 const signupForm = document.querySelector("form.signup");
-console.dir(signupForm);
 signupForm.addEventListener("submit", onSignupSubmit);
 
 const name = signupForm.querySelector("input[name ='name']");
+const nickname = signupForm.querySelector("input[name ='nickname']");
 const mail = signupForm.querySelector("input[name ='email']");
 const pw = signupForm.querySelector("input[name ='password']");
 const check =signupForm.querySelector("input[name ='check']");
@@ -38,6 +38,9 @@ function onSignupSubmit(event){
     var docData = {
       NAME : name.value,
       EMAIL : mail.value,
+      PIC : `profile/undraw_profile_pic.png`,
+      NICKNAME : nickname.value,
+      hasPosted : false,
     };
     db.collection('users').doc(user.uid).set(docData).then((docRef) => {
       alert("User added successfully!");

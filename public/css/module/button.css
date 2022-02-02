@@ -25,3 +25,8 @@ button:active {
   background-color: var(--accent);
   color : var(--primary);
 }
+
+button:disabled {
+  background-color: var(--grayscale);
+  color : var(--secondary);
+}

@@ -45,7 +45,7 @@
   });
 
   /*top_bar underline implement*/
-  const li = document.querySelectorAll("ul li a");
+  const li = document.querySelectorAll(".nav_bar ul li a");
   for(i=0;i<li.length;i++) li[i].classList.add("underline");
 
   /* assign href to each a tags*/
@@ -56,11 +56,8 @@
   const login = document.querySelector("#loginHref");
   const signup = document.querySelector("#signupHref");
   const logout = document.querySelector("#logout");
-  const nameAnchor = document.querySelector("a#name");
   const profile = document.querySelector("a#profile");
-
-  profile.classList.remove("underline");
-
+  const nameAnchor = document.querySelector("a#name");
 
 
 
@@ -71,21 +68,31 @@
   nameAnchor.href=`profile.html`;
   profile.href=`profile.html`;
 
+
 function onAuthLoginedTopBar(user) {
   document.getElementById("login").style.display="flex";
-  const uid = user.uid;
-  const name = user.displayName;
-  console.log("logined as ",name);
+  const uid = user.uid
 
   const nameAnchor = document.querySelector("a#name");
   nameAnchor.textContent = name;
 
-  storage.ref(`profile/${user.uid}.png`).getDownloadURL().then((url) => {
-    var img = document.querySelector("img#profilePic");
-    img.setAttribute('src', url);
-  })
-  .catch((error) => {
-    console.log("error in downloading profile pic : ",error);
+  db.collection('users').doc(uid).get().then((doc)=>{
+    if(doc.exists){
+      const name= doc.data().NAME;
+      nameAnchor.innerHTML = name;
+      console.log("logined as ",name);
+      const nickname = doc.data().NICKNAME;
+      const query = `?nickname=${nickname}`;
+      profile.href=`profile.html`+query;
+      nameAnchor.href=`profile.html`+query;
+
+      storage.ref(doc.data().PIC).getDownloadURL().then((url) => {
+        var img = document.querySelector("img#profilePic");
+        img.setAttribute('src', url);
+      }).catch((error) => {
+        console.log("error in downloading profile pic : ",error);
+      });
+    }
   });
 }
 
