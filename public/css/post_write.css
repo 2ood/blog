@@ -33,3 +33,8 @@ input:focus, textarea:focus {
 hr {
   color : var(--primary);
 }
+
+h4[name="WRITER"] {
+  width : 100%;
+  padding : 20px;
+}

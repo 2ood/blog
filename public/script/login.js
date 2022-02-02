@@ -1,6 +1,5 @@
 
 const loginForm = document.querySelector("form.login");
-console.dir(loginForm);
 loginForm.addEventListener("submit", onLoginSubmit);
 
 function onLoginSubmit(event){
@@ -23,4 +22,12 @@ function onLoginSubmit(event){
     alert(`failed to login. error(${errorCode}) : ${errorMessage}`);
   });
 
+}
+
+function onAuthLogined(user) {
+  return;
+}
+
+function onAuthAnonymous() {
+  return; 
 }

@@ -20,7 +20,7 @@ class Post {
     }
 }
 const title = document.querySelector("input[name='TITLE']");
-const writer = document.querySelector("input[name='WRITER']");
+const writer = document.querySelector("h4[name='WRITER']");
 const summary = document.querySelector("textarea[name='SUMMARY']");
 const markdown = document.querySelector("textarea[name='CONTENT']");
 const preview = document.querySelector("div.preview");
@@ -28,7 +28,7 @@ const preview = document.querySelector("div.preview");
 const viewButton = document.querySelector("button[name='viewButton']");
 
 viewButton.addEventListener("click", (event)=>{
-  previewContent = markdown.value.split("\n").join("<br/>");
+  previewContent = markdown.value.split("\n").join("\n<br/>");
   preview.innerHTML=marked.parse(previewContent);
   markdown.style.display=(markdown.style.display=="none")?"block":"none";
   preview.style.display=(preview.style.display=="none")?"block":"none";
@@ -45,7 +45,7 @@ if(isEditMode) {
   /*textarea value put*/
   db.collection('posts').doc(params.get("id")).get().then((snapshot)=>{
         if(snapshot.exists){
-          const dat = snapshot.data()
+          const dat = snapshot.data();
           title.value=dat.TITLE;
           writer.value=dat.WRITER;
           summary.value=dat.SUMMARY;
@@ -65,7 +65,14 @@ function onSubmit(event){
   const last_update = firebase.firestore.FieldValue.serverTimestamp();
   const content = markdown.value.split("\n").join("\\n");
 
-  const newPost = new Post(title.value,writer.value,last_update,summary.value,content);
+
+  const newPost = new Post(title.value,writer.textContent,last_update,summary.value,content);
+  const user = auth.currentUser;
+
+  if(user==null) {
+    alert("you should login to post.");
+    return;
+  }
 
   if(isEditMode){
     db.collection('posts').doc(params.get("id")).update(newPost.toJson()).then((docRef) => {
@@ -75,24 +82,74 @@ function onSubmit(event){
     .catch((error) => {
         alert("Error editing document: ", error);
     });
-  }
-  else {
-    db.collection('posts').add(newPost.toJson()).then((docRef) => {
-      alert("Document uploaded successfully!");
-      window.location.href = './post_list.html';
-    })
-    .catch((error) => {
-        alert("Error adding document: ", error);
-    });
-}
 
+    return ;
+  }
+
+  db.collection('posts').add(newPost.toJson()).then((docRef) => {
+    db.collection('users').doc(user.uid).get().then((userDoc)=>{
+
+      if(userDoc.data().hasPosted) {
+        db.collection('users').doc(user.uid).update({
+          posts: db.FieldValue.arrayUnion(docRef.id),
+        }).then(() => {
+          alert("Document uploaded successfully!");
+          window.location.href = './post_list.html';
+        }).catch((error) => {
+          docRef.delete().catch(()=>{
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            alert(`failed to delete post. error(${errorCode}) : ${errorMessage}`);
+          });
+          var errorCode = error.code;
+          var errorMessage = error.message;
+          alert(`failed to update user DB. error(${errorCode}) : ${errorMessage}`);
+        });
+      } else {
+        db.collection('users').doc(user.uid).update({
+          hasPoted : true,
+          posts: [docRef.id],
+        }).then(() => {
+          alert("Document uploaded successfully!");
+          window.location.href = './post_list.html';
+        }).catch((error) => {
+          docRef.delete().catch(()=>{
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            alert(`failed to delete post. error(${errorCode}) : ${errorMessage}`);
+          });
+          var errorCode = error.code;
+          var errorMessage = error.message;
+          alert(`failed to update user DB. error(${errorCode}) : ${errorMessage}`);
+        });
+      }
+    }).catch((error) => {
+      docRef.delete().catch(()=>{
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        alert(`failed to delete post. error(${errorCode}) : ${errorMessage}`);
+      });
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      alert(`Error finding user: error(${errorCode}) : ${errorMessage}`);
+  });
+}).catch((error) => {
+    var errorCode = error.code;
+    var errorMessage = error.message;
+    alert(`Error adding document: error(${errorCode}) : ${errorMessage}`);
+});
 
 }
 
 function onAuthLogined(user) {
   onAuthLoginedTopBar(user);
+  db.collection('users').doc(user.uid).get().then((doc)=>{
+    writer.innerHTML =doc.data().NICKNAME;
+  });
+
 }
 
 function onAuthAnonymous() {
-  onAuthAnonymousTopBar();
+  alert("You should login to post.");
+  window.location.href="post_list.html";
 }

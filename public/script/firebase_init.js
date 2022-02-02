@@ -14,4 +14,4 @@ const db = app.firestore();
 const storage = app.storage();
 const auth = app.auth();
 
-auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL);
+auth.setPersistence(firebase.auth.Auth.Persistence.SESSION);

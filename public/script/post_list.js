@@ -1,3 +1,13 @@
+const writeButton = document.querySelector("button[name='write']");
+writeButton.addEventListener('click',(event)=>{
+  event.preventDefault();
+  if(auth.currentUser==null) {
+    alert("Login not identified.");
+  }
+  else window.location.href="post_write.html";
+});
+
+
 const params = new URLSearchParams(window.location.search);
 
 const content = document.getElementById("table");
@@ -42,10 +52,14 @@ function hideLoadingPlaceHolders() {
   for(let i=0;i<loading.length;i++) {
     loading[i].hidden="true";
   }
+
 }
 
 function onAuthLogined(user) {
   onAuthLoginedTopBar(user);
+  const write = document.querySelector("button[name='write']");
+  write.disabled = false;
+  write.innerHTML = "write";
 }
 
 function onAuthAnonymous() {
