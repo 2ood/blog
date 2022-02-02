@@ -43,3 +43,11 @@ function hideLoadingPlaceHolders() {
     loading[i].hidden="true";
   }
 }
+
+function onAuthLogined(user) {
+  onAuthLoginedTopBar(user);
+}
+
+function onAuthAnonymous() {
+  onAuthAnonymousTopBar();
+}

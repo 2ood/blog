@@ -2,10 +2,11 @@
   content : ' ';
   position : absolute;
   background-color: #E0A467;
-  top:26px;
+  top: 50%;
   left:0;
   width:0%;
   height :2px;
+  transform: translateY(1em);
   transition: width 0.3s ease-out;
 }
 
