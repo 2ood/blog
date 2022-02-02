@@ -1,4 +1,4 @@
-app.auth().onAuthStateChanged((user) => {
+auth.onAuthStateChanged((user) => {
   if (user) {
 
     document.getElementById("login").style.display="flex";
