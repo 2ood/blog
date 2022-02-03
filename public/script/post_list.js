@@ -35,10 +35,10 @@ db.collection('posts').orderBy("LAST_UPDATE", "desc").get().then((snapshot)=>{
     }
 
     content.innerHTML+=`
-      <tr class="${doc.id}">
+      <tr class="rows ${doc.id}">
         <td>${index++}</td>
         <td><a href="post.html?id=${doc.id}">${doc.data().TITLE}</br>
-        <span class="grayscale-font">${doc.data().SUMMARY}</span></a></td>
+        <span class="summary">${doc.data().SUMMARY}</span></a></td>
         <td>${doc.data().WRITER}</td>
         <td>${last_update}</td>
       </tr>

@@ -15,3 +15,9 @@ const storage = app.storage();
 const auth = app.auth();
 
 auth.setPersistence(firebase.auth.Auth.Persistence.SESSION);
+
+function alertError(error, progressTitle) {
+  var errorCode = error.code;
+  var errorMessage = error.message;
+  alert(`Error in ${progressTitle} : error(${errorCode}) : ${errorMessage}`);
+}

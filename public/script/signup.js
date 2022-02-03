@@ -40,22 +40,18 @@ function onSignupSubmit(event){
       EMAIL : mail.value,
       PIC : `profile/undraw_profile_pic.png`,
       NICKNAME : nickname.value,
-      hasPosted : false,
+      POSTS : [],
     };
     db.collection('users').doc(user.uid).set(docData).then((docRef) => {
       alert("User added successfully!");
       window.location.href = './index.html';
     })
     .catch((error) => {
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      alert(`failed to update user DB. error(${errorCode}) : ${errorMessage}`);
+      alertError(error, "updating user DB");
     });
   })
   .catch((error) => {
-    var errorCode = error.code;
-    var errorMessage = error.message;
-    alert(`failed to sign up. error(${errorCode}) : ${errorMessage}`);
+    alertError(error, "signing up");
   });
 
 }

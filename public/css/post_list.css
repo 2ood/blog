@@ -17,8 +17,16 @@ td:nth-child(4n-2) {
   padding : 0 1%;
 }
 
-table tr:nth-child(6n),tr:nth-child(6n-1),tr:nth-child(6n-2)   {
+table tr.rows, table tr.rows .summary {
+  transition : all 0.3s ease-in-out;
+}
+
+table tr.rows:hover {
   background-color : var(--grayscale);
+}
+
+table tr.rows:hover .summary {
+  color : var(--secondary);
 }
 
 button {

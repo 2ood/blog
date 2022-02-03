@@ -80,65 +80,37 @@ function onSubmit(event){
       window.location.href = './post_list.html';
     })
     .catch((error) => {
-        alert("Error editing document: ", error);
+        alertError(error,"editing document");
     });
-
-    return ;
+  }
+  else {
+    db.collection('posts').add(newPost.toJson()).then((docRef) => {
+      db.collection('users').doc(user.uid).get().then((userDoc)=>{
+        const formerPosts = userDoc.data().POSTS;
+        db.collection('users').doc(user.uid).update({
+            POSTS : [...formerPosts,docRef.id]
+          }).then(() => {
+            alert("Document uploaded successfully!");
+            window.location.href = './post_list.html';
+          }).catch((error) => {
+            deleteDocument(docRef);
+            alertError(error,"updating user post DB");
+          });
+        }).catch((error) => {
+            deleteDocument(docRef);
+            alertError(error,"reading writer");
+      });
+    }).catch((error) => {
+        alertError(error,"uploading post");
+  });
   }
 
-  db.collection('posts').add(newPost.toJson()).then((docRef) => {
-    db.collection('users').doc(user.uid).get().then((userDoc)=>{
+}
 
-      if(userDoc.data().hasPosted) {
-        db.collection('users').doc(user.uid).update({
-          posts: db.FieldValue.arrayUnion(docRef.id),
-        }).then(() => {
-          alert("Document uploaded successfully!");
-          window.location.href = './post_list.html';
-        }).catch((error) => {
-          docRef.delete().catch(()=>{
-            var errorCode = error.code;
-            var errorMessage = error.message;
-            alert(`failed to delete post. error(${errorCode}) : ${errorMessage}`);
-          });
-          var errorCode = error.code;
-          var errorMessage = error.message;
-          alert(`failed to update user DB. error(${errorCode}) : ${errorMessage}`);
-        });
-      } else {
-        db.collection('users').doc(user.uid).update({
-          hasPoted : true,
-          posts: [docRef.id],
-        }).then(() => {
-          alert("Document uploaded successfully!");
-          window.location.href = './post_list.html';
-        }).catch((error) => {
-          docRef.delete().catch(()=>{
-            var errorCode = error.code;
-            var errorMessage = error.message;
-            alert(`failed to delete post. error(${errorCode}) : ${errorMessage}`);
-          });
-          var errorCode = error.code;
-          var errorMessage = error.message;
-          alert(`failed to update user DB. error(${errorCode}) : ${errorMessage}`);
-        });
-      }
-    }).catch((error) => {
-      docRef.delete().catch(()=>{
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        alert(`failed to delete post. error(${errorCode}) : ${errorMessage}`);
-      });
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      alert(`Error finding user: error(${errorCode}) : ${errorMessage}`);
+function deleteDocument(docRef) {
+  docRef.delete().catch(()=>{
+    alertError(error, "deleting post");
   });
-}).catch((error) => {
-    var errorCode = error.code;
-    var errorMessage = error.message;
-    alert(`Error adding document: error(${errorCode}) : ${errorMessage}`);
-});
-
 }
 
 function onAuthLogined(user) {
