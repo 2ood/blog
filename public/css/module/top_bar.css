@@ -1,3 +1,5 @@
+@import "../base/colors.css";
+
 #top_bar {
   background-color: var(--transparent);
   color : var(--primary);
@@ -39,13 +41,15 @@
 }
 .logo {
   position :relative;
-  color : var(--secondary);
+  color : white;
   text-shadow : -1px 0 var(--primary), 0 1px var(--primary), 1px 0 var(--primary), 0px -1px var(--primary);
 }
 
 .log_status {
   display : inline-block;
-  width : 200px;
+  width : 20%;
+  max-width : 150px;
+  min-width : 125px;
   align-items: center;
 }
 
@@ -65,4 +69,10 @@
 .nav_bar {
   display : inline-block;
   width : 300px;
+}
+
+@media (max-width : 750px) {
+  #top_bar ul, #top_bar ul{
+  display : none;
+  }
 }

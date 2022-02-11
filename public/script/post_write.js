@@ -25,6 +25,11 @@ const summary = document.querySelector("textarea[name='SUMMARY']");
 const markdown = document.querySelector("textarea[name='CONTENT']");
 const preview = document.querySelector("div.preview");
 
+markdown.addEventListener("paste",(event)=>{
+  event.preventDefault();
+  console.log("pasted!");
+});
+
 const viewButton = document.querySelector("button[name='viewButton']");
 
 viewButton.addEventListener("click", (event)=>{

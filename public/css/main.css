@@ -1,4 +1,3 @@
-@import "base/colors.css";
 @import "base/font.css";
 @import "base/util.css";
 @import "base/module.css";
@@ -13,13 +12,11 @@
 
 .hidden {display:none;}
 
-a, a:visited {color :inherit; }
+a, a:visited { all : unset;}
 
-html {height: 100%;}
+
 
 body {
-  height : 100%;
-  min-height: 100%;
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none;  /* Internet Explorer 10+ */
   font-family: 'Roboto', sans-serif;
@@ -35,15 +32,36 @@ ul li {position : relative;}
 
 h1 {
   display:inline-block;
-  margin-bottom : 10px;
+  margin : 10px 0;
 }
 
 #content {
   margin : 0 20%;
   margin-top : 100px;
+  overflow-y: auto;
   position : relative;
   justify-content: center;
   border-radius: 5px;
-  padding : 5%;
   font-family: 'Varela', sans-serif;
 }
+
+// X-Small devices (portrait phones, less than 576px)
+// No media query for `xs` since this is the default in Bootstrap
+
+//Small devices (landscape phones, 576px and up)
+@media all and (max-width : 767px) {
+}
+
+// Medium devices (tablets, 768px and up)
+@media all and (max-width : 991px) {
+ }
+
+// Large devices (desktops, 992px and up)
+@media all and (max-width : 1199px) {
+ }
+
+// X-Large devices (large desktops, 1200px and up)
+@media all and (max-width : 1399px) {
+}
+
+// XX-Large devices (larger desktops, 1400px and up)

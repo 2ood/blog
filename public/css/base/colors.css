@@ -1,8 +1,18 @@
 :root {
-  --primary: #E0A467;
+  --primary:#4f84c4;
   --secondary: white;
-  --accent : #6495ed; //#283618;
+  --accent : #6495ed;
   --transparent :#00000000;
   --error : red;
   --grayscale : #d3d3d3;
+  --pantone-greenery :  #88b04b;
+  --pantone-serenity : #95AAD3;
+  --pantone-emerald : #00997b;
+  --pantone-classic-blue : #0f4c81;
+  --pantone-illuminating-yellow : #F5DF4D;
+  --pantone-lotus : #e2c1c0;
+  --pantone-very-peri : #6667AB;
+  --pantone-butterum : #C68F65;
+  --pantone-marina : #4f84c4;
+  --my-first-pick : #E0A467;
 }
