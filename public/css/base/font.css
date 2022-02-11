@@ -4,3 +4,41 @@ font-family: 'Roboto', sans-serif;
 font-family : 'Mulish', sans-serif;
 font-family: 'Varela', sans-serif;
 */
+
+h1 {font-size: 45px;}
+h2 {font-size: 40px;}
+h3 {font-size: 30px;}
+h4 {font-size: 25px;}
+h5 {font-size: 22px;}
+h6 {font-size: 20px;}
+p {font-size: 18px;}
+
+:root {
+  --font-size-h1 : 50px;
+  --font-size-h2 : 40px;
+  --font-size-h3 : 30px;
+  --font-size-h4 : 25px;
+  --font-size-h5 : 22px;
+  --font-size-h6 : 20px;
+  --normal-size : 18px;
+}
+
+@media (max-width :991px) {
+  h1 {font-size: 30px;}
+  h2 {font-size: 25px;}
+  h3 {font-size: 22px;}
+  h4 {font-size: 20px;}
+  h5 {font-size: 18px;}
+  h6 {font-size: 16px;}
+  p {font-size: 16px;}
+
+  :root {
+    --font-size-h1 : 30px;
+    --font-size-h2 : 25px;
+    --font-size-h3 : 22px;
+    --font-size-h4 : 20px;
+    --font-size-h5 : 18px;
+    --font-size-h6 : 16px;
+    --normal-size : 16px;
+  }
+}

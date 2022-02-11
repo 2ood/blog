@@ -14,9 +14,13 @@
 
 a, a:visited { all : unset;}
 
-
+html{
+  height: 100vh;
+}
 
 body {
+  height : 100%;
+  min-height: 100%;
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none;  /* Internet Explorer 10+ */
   font-family: 'Roboto', sans-serif;
@@ -36,32 +40,48 @@ h1 {
 }
 
 #content {
-  margin : 0 20%;
+  margin : 0 5%;
   margin-top : 100px;
   overflow-y: auto;
   position : relative;
   justify-content: center;
   border-radius: 5px;
   font-family: 'Varela', sans-serif;
+  height: 100%;
+  min-height : 100%;
 }
 
-// X-Small devices (portrait phones, less than 576px)
-// No media query for `xs` since this is the default in Bootstrap
-
-//Small devices (landscape phones, 576px and up)
-@media all and (max-width : 767px) {
+@media (min-width: 576px) {
+  #content {
+    margin : 0 5%;
+    margin-top : 100px;
+  }
 }
 
-// Medium devices (tablets, 768px and up)
-@media all and (max-width : 991px) {
- }
-
-// Large devices (desktops, 992px and up)
-@media all and (max-width : 1199px) {
- }
-
-// X-Large devices (large desktops, 1200px and up)
-@media all and (max-width : 1399px) {
+@media (min-width: 768px) {
+  #content {
+    margin : 0 7%;
+    margin-top : 100px;
+  }
 }
 
-// XX-Large devices (larger desktops, 1400px and up)
+@media (min-width: 992px) {
+  #content {
+    margin : 0 10%;
+    margin-top : 100px;
+  }
+}
+
+@media (min-width: 1200px) {
+  #content {
+    margin : 0 15%;
+    margin-top : 100px;
+  }
+}
+
+@media (min-width: 1400px) {
+  #content {
+    margin : 0 20%;
+    margin-top : 100px;
+  }
+}

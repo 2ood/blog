@@ -7,6 +7,11 @@
   z-index : 10;
   width : 100vw;
   top : 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding : 10px 10%;
+  height : 50px;
 } /* wrapper for top bar sticked to the top, following scroll*/
 
 #top_bar .space_box#vw10 {
@@ -29,16 +34,6 @@
   height : 100%;
 }
 
-.logo_bar {
-  display: flex;
-  position : relative;
-  justify-content: space-between;
-  align-items: center;
-  padding : 10px 10%;
-  text-align: center;
-  height : 50px;
-  align-self: center;
-}
 .logo {
   position :relative;
   color : white;
@@ -53,12 +48,25 @@
   align-items: center;
 }
 
-#top_bar ul, #top_bar ul{
+.nav_bar > ul {
  display : flex;
  position :relative;
  width : 100%;
  justify-content: space-between;
+}
 
+.nav_bar > ul ul{
+ position :absolute;
+ top : 2em;
+ justify-content: space-between;
+ transition : all 0.3s ease-in-out;
+}
+
+.log_status ul {
+  display : flex;
+  position :relative;
+  width : 100%;
+  justify-content: space-between;
 }
 
 .log_status ul li, .nav_bar ul li {
@@ -71,8 +79,25 @@
   width : 300px;
 }
 
-@media (max-width : 750px) {
-  #top_bar ul, #top_bar ul{
+#menu {
   display : none;
+}
+
+
+
+@media (max-width : 750px) {
+  .nav_bar > ul{
+  display : none;
+  }
+
+  #menu {
+    margin-left: 10px;
+    display : inline-block;
+    color : var(--primary);
+  }
+
+  #top_bar {
+    text-align: right;
+    padding : 10px 5%;
   }
 }

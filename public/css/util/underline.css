@@ -1,4 +1,4 @@
-.underline::before {
+.underline-left-to-right::before {
   content : ' ';
   position : absolute;
   background-color: var(--primary);
@@ -10,10 +10,40 @@
   transition: width 0.3s ease-out;
 }
 
-.underline:hover::before {
+.underline-left-to-right:hover::before {
   width:100%;
 }
 
-.underline:hover::after {
+.underline-move-down::before {
+  content : ' ';
+  position : absolute;
+  background-color: var(--primary);
+  top: 40%;
+  left:0;
   width:100%;
+  height : 0;
+  transform: translateY(1em);
+  transition: all 0.3s ease-out;
+}
+
+.underline-move-down:hover::before {
+  top : 40%;
+  height : 2px;
+}
+
+.underline-gradient-show::before {
+  content : ' ';
+  position : absolute;
+  background-color: transparent;
+  top: 40%;
+  left:0;
+  width:100%;
+  height : 2px;
+  transform: translateY(1em);
+  transition: all 0.3s ease-out;
+}
+
+.underline-gradient-show:hover::before {
+  top : 40%;
+  background-color: var(--primary);
 }
