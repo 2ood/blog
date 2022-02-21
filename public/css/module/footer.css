@@ -1,8 +1,8 @@
 footer {
-  display : grid;
+  display : block;  
   position: relative;
   z-index : -100;
-
+  padding-top : 100px;
   align-items: center;
   align-content: center;
   justify-content: center;

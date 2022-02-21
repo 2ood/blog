@@ -15,12 +15,13 @@
 a, a:visited { all : unset;}
 
 html{
-  height: 100vh;
+  height : 100%;
 }
 
 body {
-  height : 100%;
-  min-height: 100%;
+  position: relative;
+  height: auto;
+  min-height: 100% !important;
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none;  /* Internet Explorer 10+ */
   font-family: 'Roboto', sans-serif;
@@ -42,13 +43,22 @@ h1 {
 #content {
   margin : 0 5%;
   margin-top : 100px;
-  overflow-y: auto;
   position : relative;
   justify-content: center;
   border-radius: 5px;
   font-family: 'Varela', sans-serif;
   height: 100%;
   min-height : 100%;
+}
+
+#content-no-top-marign {
+  margin : 0 5%;
+  position : relative;
+  justify-content: center;
+  border-radius: 5px;
+  font-family: 'Varela', sans-serif;
+  height: 100%;
+  min-height : 100vh;
 }
 
 @media (min-width: 576px) {

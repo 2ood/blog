@@ -12,6 +12,7 @@
   height : 50px;
   box-shadow : 0 5px 5px var(--primary);
   transition : all .3s ease-in-out;
+  z-index : 1000;
 }
 #to_top:hover {
   background : var(--accent);

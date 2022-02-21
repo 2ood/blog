@@ -5,24 +5,36 @@
     <link rel="stylesheet" href="css/main.css"/>
     <link rel="stylesheet" href="css/coder.css"/>
     <link rel="shortcut icon" href="img/flight_takeoff.svg"/><!-- from google fonts-->
-    <!--
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-storage.js"></script>
     <script src="script/firebase_init.js"></script>
-    -->
     <title>2OOD'S BLOG</title>
   </head>
   <body>
     <!--<div id="loading"><br></div>-->
     <div id="top_bar"></div><!--.top_bar-->
-    <!--
     <script src="script/module/top_bar.js"></script>
-    -->
+
     <div id = content>
-      asdfasdfasf
+      <h1> Projects</h1>
+      <div id="list-container-1">
+        <div class="slide-popout-container">
+          <div class="slide-popout" index="0">0</div>
+          <div class="slide-popout" index="1">1</div>
+          <div class="slide-popout vanish" index="2">2</div>
+          <div class="slide-popout vanish" index="3">3</div>
+          <div class="slide-popout vanish" index="4">4</div>
+          <div class="slide-popout vanish" index="5">5</div>
+          <div class="slide-popout vanish" index="6">6</div>
+          <div class="slide-popout vanish" index="7">7</div>
+          <div class="slide-popout vanish" index="8">8</div>
+        </div>
+      </div>
+      <div class="clearbox"></div>
+      <script src="script/module/slider_popout.js"></script>
     </div>
     <span id="to_top"></span>
     <script src="script/module/to_top.js"></script>
@@ -30,14 +42,15 @@
     <script src="script/module/footer.js"></script>
     <script src="script/main.js"></script>
     <script src="script/coder.js"></script>
+    <!--
     <script type="module">
       import { Octokit } from "https://cdn.skypack.dev/@octokit/core";
       const oct = new Octokit({ auth: `` });
       const commits = await getCommits(oct);
       console.dir(commits);
     </script>
-    <!--
-    <script src="script/auth_init.js"></script>
     -->
+
+    <script src="script/auth_init.js"></script>
   </body>
 </html>

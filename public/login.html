@@ -13,18 +13,17 @@
     <title>2ood's blog</title>
   </head>
   <body>
-    <form class="login" method = "post">
-      <h1>login</h1>
-      <input required name ="email" placeholder="Email" type="email"/>
-      <input required name ="password" placeholder="비밀번호" type="password"/>
-      <button class="fill" type="submit">LOGIN</button>
-      <button class="fill" type="button" onclick="location.href='signup.html'">SIGN UP</button>
-      <div class="hidden" id="error">login failed.</div>
-    </form>
-
-      <footer>
-        <div> background sited: <a href="https://unsplash.com">Unsplash.</a></div>
-      </footer>
+    <div id="content-no-top-marign">
+      <form class="login" method = "post">
+        <h1>login</h1>
+        <input required name ="email" placeholder="Email" type="email"/>
+        <input required name ="password" placeholder="비밀번호" type="password"/>
+        <button class="fill" type="submit">LOGIN</button>
+        <button class="fill" type="button" onclick="location.href='signup.html'">SIGN UP</button>
+        <div class="hidden" id="error">login failed.</div>
+      </form>
+    </div>
+      <footer></footer>
     <script src="script/module/footer.js"></script>
     <script src="script/login.js"></script>
     <script src="script/auth_init.js"></script>

@@ -43,8 +43,8 @@
 .log_status {
   display : inline-block;
   width : 20%;
-  max-width : 150px;
-  min-width : 125px;
+  max-width : 200px;
+  min-width : 150px;
   align-items: center;
 }
 
@@ -63,7 +63,7 @@
 }
 
 .log_status ul {
-  display : flex;
+  display : inline-block;
   position :relative;
   width : 100%;
   justify-content: space-between;

@@ -1,88 +1,101 @@
-  /*modularize html of top bar*/
-  const top_bar = document.getElementById("top_bar");
+/*modularize html of top bar*/
+const top_bar = document.getElementById("top_bar");
 
-  top_bar.innerHTML=`
-    <div class="logo">
-      <a href="index.html"><h1>2ood</h1></a>
-    </div> <!--.logo-->
-    <div class="space_box" id="vw10"> </div>
-    <div class="nav_bar">
-      <ul>
-        <li><a href="#" id="about">ABOUT</a></li>
-        <li><a href="#" id="coder">CODER</a>
-          <ul class="hidden">
-            <li><a href="#">NESTED1</a></li>
-            <li><a href="#">NESTED2</a></li>
-            <li><a href="#">NESTED3</a></li>
-            <li><a href="#">NESTED4</a></li>
-          </ul>
-        </li>
-        <li><a href="#" id="notes">NOTES</a></li>
-        <li><a href="#" id="hobbies">HOBBIES</a></li>
-      </ul>
-    </div><!--.navbar-->
+top_bar.innerHTML=`
+  <div class="logo">
+    <a href="index.html"><h1>2ood</h1></a>
+  </div> <!--.logo-->
+  <div class="space_box" id="vw10"> </div>
+  <div class="nav_bar">
+    <ul>
+      <li><a href="#" id="about">ABOUT</a></li>
+      <li><a href="#" id="coder">CODER</a></li>
+      <li><a href="#" id="notes">NOTES</a></li>
+      <li><a href="#" id="hobbies">HOBBIES</a>
+        <ul class="hidden">
+          <li><a href="#">COFFEE</a></li>
+          <li><a href="#">EXERCISE</a></li>
+          <li><a href="#">MUSIC</a></li>
+          <li><a href="#">PLANT</a></li>
+        </ul>
+      </li>
+    </ul>
+  </div><!--.navbar-->
 
-    <span class="log_status">
-      <ul style="display:none;" id="logout">
-        <li><a href="#" id="loginHref">LOGIN</a></li>
-        <li><a href="#" id="signupHref">SIGN UP</a></li>
-      </ul>
-      <ul style="display:none;" id="login">
-        <li><a href="#" id="name"></a></li>
-        <li><a href="#" id="logout">LOGOUT</a></li>
-        <li><div id ="profilePic-container"><a href="#" id="profile"><img id="profilePic" src="img/profile_gray.png"/></a></div></li>
-      </ul>
-    </span><!--.log_status-->
-    <span class="material-icons grayscale-font" id="menu">menu</span>
-  `;
+  <span class="log_status">
+    <ul style="display:none;" id="logouted-pad">
+      <li><a href="#" id="loginHref">LOGIN</a></li>
+      <li><a href="#" id="signupHref">SIGN UP</a></li>
+    </ul>
+    <ul style="display:none;" id="logined-pad">
+      <li><a href="#" id="name"></a></li>
+      <li><a href="#" id="logout">LOGOUT</a></li>
+      <li><div id ="profilePic-container"><a href="#" id="profile"><img id="profilePic" src="img/profile_gray.png"/></a></div></li>
+    </ul>
+  </span><!--.log_status-->
+  <span class="material-icons grayscale-font" id="menu">menu</span>
+`;
 
-  /*logo vanishing effect*/
-  let scrollY = window.scrollY;
-  window.addEventListener('scroll', () => {
-    scrollY = window.scrollY;
-      logo = document.querySelector(".logo");
-      logo.style.opacity=(scrollY<100?1:(1-scrollY/200))*1.0;
-  });
+/*logo vanishing effect*/
+let scrollY = window.scrollY;
+window.addEventListener('scroll', () => {
+  scrollY = window.scrollY;
+    logo = document.querySelector(".logo");
+    logo.style.opacity=(scrollY<100?1:(1-scrollY/200))*1.0;
+});
 
-  /*top_bar underline implement*/
-  const li = document.querySelectorAll(".nav_bar > ul > li > a");
-  for(i=0;i<li.length;i++) li[i].classList.add("underline-gradient-show");
+/*top_bar underline implement*/
+const li = document.querySelectorAll(".nav_bar > ul > li > a");
+for(i=0;i<li.length;i++) li[i].classList.add("underline-gradient-show");
 
-  /* assign href to each a tags*/
-  const about = document.querySelector("a#about");
-  const coder = document.querySelector("a#coder");
-  const notes = document.querySelector("a#notes");
-  const hobbies = document.querySelector("a#hobbies");
-  const login = document.querySelector("#loginHref");
-  const signup = document.querySelector("#signupHref");
-  const logout = document.querySelector("#logout");
-  const profile = document.querySelector("a#profile");
-  const nameAnchor = document.querySelector("a#name");
+/* assign href to each a tags*/
+const about = document.querySelector("a#about");
+const coder = document.querySelector("a#coder");
+const notes = document.querySelector("a#notes");
+const hobbies = document.querySelector("a#hobbies");
+const login = document.querySelector("#loginHref");
+const signup = document.querySelector("#signupHref");
+const profile = document.querySelector("a#profile");
+const nameAnchor = document.querySelector("a#name");
 
-  notes.href="post_list.html";
-  login.href="login.html";
-  signup.href="signup.html";
-  nameAnchor.href=`profile.html`;
-  profile.href=`profile.html`;
+coder.href="coder.html";
+notes.href="post_list.html";
+login.href="login.html";
+signup.href="signup.html";
+nameAnchor.href=`profile.html`;
+profile.href=`profile.html`;
 
-  /* show nested ul*/
+/* show nested ul*/
 
-  const majorUl = document.querySelectorAll(".nav_bar > ul > li");
-  for(i=0;i<majorUl.length;i++) {
-    const minorUl = majorUl[i].querySelector("li > ul");
-    if(minorUl!=null) {
-      majorUl[i].addEventListener("click", ()=>{
-        console.log("clicked");
-        minorUl.classList.toggle("hidden");
-      });
-    }
+const majorUl = document.querySelectorAll(".nav_bar > ul > li");
+for(i=0;i<majorUl.length;i++) {
+  const minorUl = majorUl[i].querySelector("li > ul");
+  if(minorUl!=null) {
+    majorUl[i].addEventListener("click", ()=>{
+      minorUl.classList.toggle("hidden");
+    });
   }
-  /*collapse to hamburger*/
-  const menu = document.querySelector("span#menu");
+}
+/*collapse to hamburger*/
+const menu = document.querySelector("span#menu");
 
+/*logout function*/
+const logout = document.getElementById("logout");
+console.log(logout);
+logout.addEventListener("click",onLogout);
+
+
+function onLogout() {
+  auth.signOut().then(() => {
+    alert("logout");
+  window.location.href="index.html";
+  }).catch((error) => {
+    alertError(error,"logout");
+});
+}
 
 function onAuthLoginedTopBar(user) {
-  document.getElementById("login").style.display="flex";
+  document.getElementById("logined-pad").style.display="flex";
   const uid = user.uid
 
   const nameAnchor = document.querySelector("a#name");
@@ -108,7 +121,9 @@ function onAuthLoginedTopBar(user) {
   });
 }
 
+
+
 function onAuthAnonymousTopBar(){
-    document.getElementById("logout").style.display="flex";
+    document.getElementById("logouted-pad").style.display="flex";
     console.log("logout");
 }

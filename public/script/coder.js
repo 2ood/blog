@@ -1,5 +1,5 @@
 
-
+/*
 async function getCommits(octokit){
   const commits = await octokit.request('GET /repos/2ood/blog/commits', {
     owner: 'octocat',
@@ -7,4 +7,15 @@ async function getCommits(octokit){
   });
 
   return commits;
+}
+*/
+
+
+
+function onAuthLogined(user) {
+  onAuthLoginedTopBar(user);
+}
+
+function onAuthAnonymous() {
+  onAuthAnonymousTopBar();
 }

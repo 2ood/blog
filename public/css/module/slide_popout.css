@@ -1,0 +1,77 @@
+.slide-popout {
+  width : 200px;
+  height : calc(70%);
+  margin : 0 10px;
+  border : 1px black solid;
+  position : relative;
+  transition: all .3s ease-in-out;
+  text-align: center;
+  display: inline-block;
+}
+
+.slide-button {
+  width : calc(50% - 200px);
+  height : 100%;
+  padding : 0 20px;
+  position : absolute;
+  display : flex;
+  top : 0;
+  bottom : 0;
+  align-items: center;
+  z-index : 10;
+  transition: all .3s ease-in-out;
+  color : white;
+  font-weight: bold;
+  vertical-align: middle;
+  font-size: var(--font-size-h4);
+}
+
+
+.vanish {
+  width :0;
+  height : 0;
+  margin :0;
+  overflow: hidden;
+  border : none;
+}
+
+.slide-button[name="left"] {
+  left : 0;
+  justify-content: flex-start;
+  background: linear-gradient(to right, var(--gray-half-transparent), 20%, transparent, 50%, transparent);
+}
+
+.slide-button[name="right"] {
+  right : 0;
+  justify-content: flex-end;
+  background: linear-gradient(to left, var(--gray-half-transparent), 10%, transparent, 50%, transparent);
+}
+
+.current {
+  width : 400px;
+  height : calc(100%);
+  margin : 0 5px;
+}
+
+.slide-popout-container {
+  text-align: center;
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  margin : 0;
+  height : 100%;
+
+}
+
+.clearbox {
+  clear : both;
+}
+
+#list-container-1 {
+  height : 600px;
+}
+
+#list-container-2 {
+  height : 100px;
+}
