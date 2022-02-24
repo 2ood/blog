@@ -30,60 +30,12 @@
   outline : none;
 }
 
-.posts-slide {
-  width : 100%;
-  margin-top :10px;
-  overflow-x: scroll;
-}
-.posts-slide ul {
-  display : inline-flex;
-  margin-bottom : 10px;
-}
-
-.posts-slide li {
-  width : 220px;
-  height : 300px;
-  background-color: var(--grayscale);
-  margin-right: 20px;
-  overflow-wrap : break-word;
-  display: inline-block;
-  overflow : hidden;
-  position :relative;
-  border-radius : 10px;
-}
-.posts-slide li .post-container {
-  width :100%;
-}
-
-.post-container .post-pic-container {
-  height : 60%;
-  background-color: var(--grayscale);
-}
-
-.post-pic-container img {
-  height : 100%;
-  width :100%;
-}
-
-.post-container .post-content-container {
-  height : 40%;
-  padding : 10px;
-}
-
-// X-Small devices (portrait phones, less than 576px)
-// No media query for `xs` since this is the default in Bootstrap
-
-//Small devices (landscape phones, 576px and up)
 @media (min-width: 576px) {  }
 
-// Medium devices (tablets, 768px and up)
 @media (min-width: 768px) { }
 
-// Large devices (desktops, 992px and up)
 @media (min-width: 992px) {  }
 
-// X-Large devices (large desktops, 1200px and up)
 @media (min-width: 1200px) {  }
 
-// XX-Large devices (larger desktops, 1400px and up)
 @media (min-width: 1400px) {  }

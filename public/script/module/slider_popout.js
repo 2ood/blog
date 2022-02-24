@@ -5,7 +5,7 @@ for(i=0;i<slides.length;i++){
   right.classList.add("hidden");
   slides[i].insertBefore(left, parent.firstChild);
   slides[i].insertBefore(right, parent.null);
-  let slide = slides[i].getElementsByClassName("slide-popout");
+  let slide = slides[i].querySelectorAll("ul > li");
   if(slide!=null) {
     slide[0].classList.add("current");
   }
@@ -38,7 +38,7 @@ function slideMove(evt) {
   let isForward = evt.srcElement.isForward;
   const parent = evt.srcElement.parentNode;
 
-  const slides = parent.getElementsByClassName("slide-popout");
+  const slides = parent.querySelectorAll("ul > li");
   const current_slide =  parent.querySelector(".current");
   const current_index = parseInt(current_slide.getAttribute('index'));
 
@@ -58,8 +58,8 @@ function slideMove(evt) {
   }
 
   if(IndexInbound(next_index)==0) shiftCurrentClass(next_index);
-  if(IndexInbound(next_next)==0) slides[next_next].classList.remove("vanish");
-  if(IndexInbound(behind)==0) slides[behind].classList.add("vanish");
+  if(IndexInbound(next_next)==0) slides[next_next].classList.add("show");
+  if(IndexInbound(behind)==0) slides[behind].classList.remove("show");
   checkWontGoFurther(parent,slides.length,current_index,next_index);
 
   function IndexInbound(target) {

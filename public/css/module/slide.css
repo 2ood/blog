@@ -1,0 +1,21 @@
+.slide-div60-div40 {
+  position : absolute;
+  top : 0;
+  bottom : 0;
+  right : 0;
+  left : 0;
+}
+
+.slide-div60-div40 div:first-of-type {
+  height : 60%;
+  background-color: var(--grayscale);
+}
+.slide-div60-div40 div:last-of-type {
+  height : 40%;
+  padding : 10px;
+}
+
+.slide-div60-div40 div:first-of-type img {
+  height : 100%;
+  width :100%;
+}

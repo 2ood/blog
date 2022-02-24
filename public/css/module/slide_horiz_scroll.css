@@ -1,0 +1,21 @@
+.slide-horiz-scroll-container {
+  width : 100%;
+  margin-top :10px;
+  overflow-x: scroll;
+}
+.slide-horiz-scroll-container > ul {
+  display : inline-flex;
+  margin-bottom : 10px;
+}
+
+.slide-horiz-scroll-container > ul > li {
+  width : 220px;
+  height : 300px;
+  background-color: var(--grayscale);
+  margin-right: 20px;
+  overflow-wrap : break-word;
+  display: inline-block;
+  overflow : hidden;
+  position :relative;
+  border-radius : 10px;
+}
