@@ -22,7 +22,6 @@ check.addEventListener('input',()=>{
   }
 });
 
-
 function onSignupSubmit(event){
   event.preventDefault();
 
@@ -54,4 +53,23 @@ function onSignupSubmit(event){
     alertError(error, "signing up");
   });
 
+}
+
+
+function onAuthLogined(user) {
+  alert("You need to logout first.");
+  window.location.href="index.html";
+}
+
+function onAuthAnonymous() {
+  const params = new URLSearchParams(window.location.search);
+  let key = params.has("key")?params.get("key"):"sample";
+
+  db.collection("registration").doc(key).get().then((doc)=>{
+    if(!(doc.exists)) {
+      alert("You don't have registration key. Contact manager \n kyungmin.official0@gmail.com");
+      window.location.href="index.html";
+    }
+    else console.log(doc.data().NAME);
+  });
 }

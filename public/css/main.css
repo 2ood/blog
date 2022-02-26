@@ -48,7 +48,7 @@ h1 {
   border-radius: 5px;
   font-family: 'Varela', sans-serif;
   height: 100%;
-  min-height : 100%;
+  min-height : 100vh;
 }
 
 #content-no-top-marign {

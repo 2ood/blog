@@ -35,15 +35,6 @@ top_bar.innerHTML=`
   </span><!--.log_status-->
   <span class="material-icons grayscale-font" id="menu">menu</span>
 `;
-
-/*logo vanishing effect*/
-let scrollY = window.scrollY;
-window.addEventListener('scroll', () => {
-  scrollY = window.scrollY;
-    logo = document.querySelector(".logo");
-    logo.style.opacity=(scrollY<100?1:(1-scrollY/200))*1.0;
-});
-
 /*top_bar underline implement*/
 const li = document.querySelectorAll(".nav_bar > ul > li > a");
 for(i=0;i<li.length;i++) li[i].classList.add("underline-gradient-show");

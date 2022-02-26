@@ -22,12 +22,19 @@
   width :100%;
   border : 7px var(--grayscale) solid;
   border-radius: 50%;
+  margin-bottom : 10px;
 }
 
 #profile-pic-container img {
   width : 100%;
   border : none;
   outline : none;
+}
+
+
+#bio {
+  margin-top : 5px;
+  color : var(--grayscale);
 }
 
 @media (min-width: 576px) {  }
