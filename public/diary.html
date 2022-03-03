@@ -3,50 +3,34 @@
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="css/main.css"/>
-    <link rel="stylesheet" href="css/coder.css"/>
+    <link rel="stylesheet" href="css/diary.css"/>
     <link rel="shortcut icon" href="img/flight_takeoff.svg"/><!-- from google fonts-->
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-storage.js"></script>
     <script src="script/firebase_init.js"></script>
-    <title>2OOD'S BLOG</title>
+    <title>2ood's blog</title>
   </head>
   <body>
-    <!--<div id="loading"><br></div>-->
-    <div id="top_bar"></div><!--.top_bar-->
+    <div id="top_bar"></div>
     <script src="script/module/top_bar.js"></script>
-
     <div id ="content">
-      <h1> Projects</h1>
-      <button disabled name="add-project">login to add project</button>
-      <div class="list-container-600">
-        <div class="slide-popout-container">
+      <h1>Notes</h1>
+      <div id="search">
+        <input type="text" placeholder="category"></input>
+        <div class="hidden" id ="suggestions">
           <ul>
           </ul>
         </div>
       </div>
-      <div class="clearbox"></div>
-      <script src="script/module/slider_popout.js"></script>
     </div>
     <span id="to_top"></span>
     <script src="script/module/to_top.js"></script>
-    <span id="back"></span>
-    <script src="script/module/back.js"></script>
     <footer></footer>
     <script src="script/module/footer.js"></script>
     <script src="script/main.js"></script>
-    <script src="script/coder.js"></script>
-    <!--
-    <script type="module">
-      import { Octokit } from "https://cdn.skypack.dev/@octokit/core";
-      const oct = new Octokit({ auth: `` });
-      const commits = await getCommits(oct);
-      console.dir(commits);
-    </script>
-    -->
-
+    <script src="script/diary.js"></script>
     <script src="script/auth_init.js"></script>
   </body>
 </html>

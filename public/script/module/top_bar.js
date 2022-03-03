@@ -10,8 +10,13 @@ top_bar.innerHTML=`
     <ul>
       <li><a href="#" id="about">ABOUT</a></li>
       <li><a href="#" id="coder">CODER</a></li>
-      <li><a href="#" id="notes">NOTES</a></li>
-      <li><a href="#" id="hobbies">HOBBIES</a>
+      <li><a href="#">NOTES</a>
+        <ul class="hidden">
+          <li><a href="#" id="diary">DIARY</a></li>
+          <li><a href="#" id="posts">POSTS</a></li>
+        </ul>
+      </li>
+      <li><a href="#">HOBBIES</a>
         <ul class="hidden">
           <li><a href="#">COFFEE</a></li>
           <li><a href="#">EXERCISE</a></li>
@@ -42,15 +47,16 @@ for(i=0;i<li.length;i++) li[i].classList.add("underline-gradient-show");
 /* assign href to each a tags*/
 const about = document.querySelector("a#about");
 const coder = document.querySelector("a#coder");
-const notes = document.querySelector("a#notes");
-const hobbies = document.querySelector("a#hobbies");
+const diary = document.querySelector("a#diary");
+const posts = document.querySelector("a#posts");
 const login = document.querySelector("#loginHref");
 const signup = document.querySelector("#signupHref");
 const profile = document.querySelector("a#profile");
 const nameAnchor = document.querySelector("a#name");
 
 coder.href="coder.html";
-notes.href="post_list.html";
+diary.href="diary.html";
+posts.href="post_list.html";
 login.href=`login.html?from=${window.location.href}`;
 signup.href="signup.html";
 nameAnchor.href=`profile.html`;
@@ -72,9 +78,7 @@ const menu = document.querySelector("span#menu");
 
 /*logout function*/
 const logout = document.getElementById("logout");
-console.log(logout);
 logout.addEventListener("click",onLogout);
-
 
 function onLogout() {
   auth.signOut().then(() => {
