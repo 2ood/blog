@@ -5,10 +5,6 @@ for(i=0;i<slides.length;i++){
   right.classList.add("hidden");
   slides[i].insertBefore(left, parent.firstChild);
   slides[i].insertBefore(right, parent.null);
-  let slide = slides[i].querySelectorAll("ul > li");
-  if(slide!=null) {
-    slide[0].classList.add("current");
-  }
 }
 
 const slide_left_buttons = document.querySelectorAll(".slide-button[name='left']");

@@ -51,7 +51,7 @@ const nameAnchor = document.querySelector("a#name");
 
 coder.href="coder.html";
 notes.href="post_list.html";
-login.href="login.html";
+login.href=`login.html?from=${window.location.href}`;
 signup.href="signup.html";
 nameAnchor.href=`profile.html`;
 profile.href=`profile.html`;

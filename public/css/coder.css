@@ -6,3 +6,7 @@
 #list-container-2 {
   height : 100px;
 }
+
+button {
+  float : right;
+}

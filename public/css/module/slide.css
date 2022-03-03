@@ -17,5 +17,10 @@
 
 .slide-div60-div40 div:first-of-type img {
   height : 100%;
-  width :100%;
+  overflow-x: hidden;
+  position : relative;
+  top : 50%;
+  left : 50%;
+  transform: translate(-50%,-50%);
+  text-align: center;
 }

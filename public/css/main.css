@@ -42,7 +42,7 @@ h1 {
 
 #content {
   margin : 0 5%;
-  margin-top : 100px;
+  margin-top : 150px;
   position : relative;
   justify-content: center;
   border-radius: 5px;
@@ -64,34 +64,34 @@ h1 {
 @media (min-width: 576px) {
   #content {
     margin : 0 5%;
-    margin-top : 100px;
+    margin-top : 150px;
   }
 }
 
 @media (min-width: 768px) {
   #content {
     margin : 0 7%;
-    margin-top : 100px;
+    margin-top : 160px;
   }
 }
 
 @media (min-width: 992px) {
   #content {
     margin : 0 10%;
-    margin-top : 100px;
+    margin-top : 170px;
   }
 }
 
 @media (min-width: 1200px) {
   #content {
     margin : 0 15%;
-    margin-top : 100px;
+    margin-top : 180px;
   }
 }
 
 @media (min-width: 1400px) {
   #content {
     margin : 0 20%;
-    margin-top : 100px;
+    margin-top : 200px;
   }
 }

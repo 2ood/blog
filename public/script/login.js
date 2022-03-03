@@ -11,10 +11,9 @@ function onLoginSubmit(event){
 
   auth.signInWithEmailAndPassword(email, password)
   .then((userCredential) => {
-    // Signed in
-    setTimeout(()=>{
-      window.location.href="index.html";
-    },2000);
+      const params = new URLSearchParams(window.location.search);
+      const redirect = params.has("from")?params.get("from"):"index.html";
+      window.location.href=redirect;
   })
   .catch((error) => {
     var errorCode = error.code;
@@ -29,5 +28,5 @@ function onAuthLogined(user) {
 }
 
 function onAuthAnonymous() {
-  return; 
+  return;
 }

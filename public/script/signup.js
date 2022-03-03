@@ -66,10 +66,10 @@ function onAuthAnonymous() {
   let key = params.has("key")?params.get("key"):"sample";
 
   db.collection("registration").doc(key).get().then((doc)=>{
-    if(!(doc.exists)) {
-      alert("You don't have registration key. Contact manager \n kyungmin.official0@gmail.com");
+    if(!(doc.exists) && doc.data().USED) {
+      alert("You don't have valid registration key.\n Contact manager kyungmin.official0@gmail.com");
       window.location.href="index.html";
     }
-    else console.log(doc.data().NAME);
+    else ;
   });
 }
