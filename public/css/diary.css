@@ -1,36 +1,43 @@
-.search input.category {
+.search input.search-input {
+  outline: none;
+  position : relative;
+  min-width : 100px;
+  top : 0;
+  left : 0;
+  min-height: 40px;
+  padding: 10px;
+  border : none;
+}
+
+textarea.content {
   outline: none;
   position : relative;
   width : 100%;
   top : 0;
   left : 0;
-  min-height: 40px;
-  padding-left: 10px;
-}
-
-input.content {
-  outline: none;
-  position : relative;
-  width : 60%;
-  top : 0;
-  left : 0;
-  min-height: 40px;
-  padding-left: 10px;
+  min-height: 50px;
+  padding: 10px;
   vertical-align: top;
+  resize: none;
+  border : none;
 }
 
 
 .search {
   position: flex;
-  display: inline-block;
-  width : 30%;
+  display: block;
 }
 
 .suggestions ul {
-  float : left;
+  position: absolute;
+  z-index : 100;
+  top : 40px;
   display: flex;
   padding : 10px;
+  width : 100%;
+  min-height: 40px;
   list-style: none;
+  background-color: var(--gray-half-transparent);
 }
 
 .suggestions ul li {
@@ -46,4 +53,39 @@ input.content {
   padding : 5px;
   margin : 5px;
   border-radius: 3px;
+}
+
+.note {
+  margin-bottom : 15px;
+}
+
+.selected-cat {
+  display: inline-block;
+  background-color: var(--grayscale);
+  padding : 5px;
+  margin : 5px;
+  border-radius: 3px;
+}
+
+#more-note {
+  display : block;
+  text-align: center;
+  font-size: var(--font-size-h6);
+  padding : 15px;
+  background-color: var(--primary);
+  border-radius: 5px;
+}
+
+#more-note:active {
+  background-color: var(--grayscale);
+}
+
+li.add-category::before {
+  content: 'add';
+  margin-right : .5em;
+  display: inline-block;
+}
+
+button[name='submit-notes'] {
+  width : 100%;
 }

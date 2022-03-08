@@ -21,3 +21,11 @@ function alertError(error, progressTitle) {
   var errorMessage = error.message;
   alert(`Error in ${progressTitle} : error(${errorCode}) : ${errorMessage}`);
 }
+
+function db_get(collection, doc, json_keys, then) {
+
+}
+
+function db_where(collection, where, json_keys, then) {
+
+}
