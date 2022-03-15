@@ -13,6 +13,7 @@ async function getCommits(octokit){
 function onAuthLogined(user) {
   onAuthLoginedTopBar(user);
   onAuthLoginedCoder();
+  onAuthLoginedProjects();
 }
 
 function onAuthAnonymous() {
@@ -26,7 +27,6 @@ function onAuthLoginedCoder() {
   const write = document.querySelector("button[name='add-project']");
   write.disabled = false;
   write.innerHTML = "add project";
-  onAuthLoginedProjects();
 }
 
 function onAuthLoginedProjects() {

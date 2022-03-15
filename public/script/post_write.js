@@ -27,7 +27,8 @@ const preview = document.querySelector("div.preview");
 
 markdown.addEventListener("paste",(event)=>{
   event.preventDefault();
-  console.log("pasted!");
+  let pastedText = (event.clipboardData || window.clipboardData).getData('text');
+  event.srcElement.value+=pastedText;
 });
 
 const viewButton = document.querySelector("button[name='viewButton']");

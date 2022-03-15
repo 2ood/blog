@@ -1,0 +1,11 @@
+.hide-button {
+  content : 'X';
+  position : absolute;
+  right : 10px;
+  top : 10px;
+  transition: all .3s ease-in-out;
+}
+.hide-button:hover {
+  color : var(--primary);
+  transform: rotateZ(-180deg);
+}

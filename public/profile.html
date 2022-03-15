@@ -11,7 +11,7 @@
     <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-storage.js"></script>
     <script src="script/firebase_init.js"></script>
-    <title>2OOD'S BLOG</title>
+    <title>2ood's breakfast</title>
   </head>
   <body>
     <!--<div id="loading"><br></div>-->
@@ -20,11 +20,16 @@
     <div id="content-profile">
       <div class="column column-left">
         <div id = "profile-pic-container">
-          <img src ="img/profile_gray.png"/>
+          <img id = "profile-image" src ="img/profile_gray.png"/>
+          <label for="profile-pic-input" id = "profile-pic-input-label" class="hidden">Change</label>
+          <input type="file" disabled id="profile-pic-input" class ="hidden" accept="image/jpeg, image/png, image/jpg"></input>
         </div>
-        <h3 id="profile-name"> asfa</h3>
-        <h6 id="profile-nickname"></h6>
-        <div id="bio">bio</div>
+        <h3 id="profile-name"></h3>
+        <input type="text" disabled id="profile-nickname" maxlength="10"></input>
+        <textarea type="text" disabled id="bio"></textarea>
+        <button class="fill hidden" id="edit-profile">Edit profile</button>
+        <button class="fill hidden" id="save">save</button>
+        <button class="fill danger hidden" id="discard">discard</button>
       </div><!--.column-left-->
       <div class="column column-right">
         <h1> POSTS </h1>

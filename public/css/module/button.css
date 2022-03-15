@@ -1,14 +1,15 @@
 button {
-  background-color: var(--primary);
-  border : none;
+  background-color: var(--secondary);
+  border : 1px var(--primary) solid;
+  color : var(--primary);
   border-radius: 0;
   padding : 0.5em;
   margin : 3px;
 }
 
 button.fill {
-  width : 100%;
-  height : 4em;
+  width : calc(100% - 10px);
+  height : 3em;
   font-size : 1em;
   margin-bottom : 10px;
 }
@@ -20,10 +21,19 @@ button.half {
   height : 4em;
   margin-bottom : 10px;
 }
+button.danger {
+  background-color: var(--secondary);
+  border : 1px var(--error) solid;
+  color : var(--error);
+}
+button.danger:active {
+  background-color: var(--error);
+  color : var(--secondary);
+}
 
 button:active {
-  background-color: var(--accent);
-  color : var(--primary);
+  background-color: var(--primary);
+  color : var(--secondary);
 }
 
 button:disabled {

@@ -11,7 +11,10 @@ writeButton.addEventListener('click',(event)=>{
 const params = new URLSearchParams(window.location.search);
 
 const content = document.getElementById("table");
-db.collection('posts').orderBy("LAST_UPDATE", "desc").get().then((snapshot)=>{
+
+const paginate = db.collection('posts').orderBy("LAST_UPDATE", "desc").limit(5);
+
+paginate.get().then((snapshot)=>{
   hideLoadingPlaceHolders();
 
   let index=1;

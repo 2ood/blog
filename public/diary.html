@@ -10,17 +10,31 @@
     <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-storage.js"></script>
     <script src="script/firebase_init.js"></script>
-    <title>2ood's blog</title>
+    <title>2ood's breakfast</title>
   </head>
   <body>
     <div id="top_bar"></div>
     <script src="script/module/top_bar.js"></script>
     <div id ="content">
       <h1>Notes</h1><br/>
+      <!--
+      <div class="note">
+        <div class="search">
+          <input type="text" class="search-input" placeholder="type category"></input>
+          <div class="suggestions">
+            <ul>
+            <li> ${doc.data().TITLE} </li>
+            <li class="hidden add-category"></li>
+            </ul>
+          </div>
+        </div>
+        <textarea type="text" class="content" placeholder="content"></textarea>
+        <button type="submit" name="submit-notes">Push</button>
+      </div>
+    -->
       <div id="more-note">+</div>
-
-      <button type="submit" name="submit-notes">Push</button>
     </div>
+    <script src="script/module/hide.js"></script>
     <span id="to_top"></span>
     <script src="script/module/to_top.js"></script>
     <footer></footer>

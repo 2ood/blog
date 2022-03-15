@@ -16,6 +16,11 @@ class Note {
 
 function onAuthLogined(user) {
   onAuthLoginedTopBar(user);
+  db.collection('notes').doc("categories").get().then((doc)=>{
+    categories = doc.data().data;
+    categoryReady=true;
+    more_note.parentNode.insertBefore(buildNote(categories),more_note);
+  });
 }
 
 function onAuthAnonymous() {
@@ -25,33 +30,10 @@ function onAuthAnonymous() {
 const more_note = document.getElementById("more-note");
 more_note.addEventListener("click",(evt)=>{
   evt.srcElement.parentNode.insertBefore(buildNote(categories),evt.srcElement );
-
 });
 
 let categories =[];
 let categoryReady = false;
-db.collection('notes').doc("categories").get().then((doc)=>{
-  categories = doc.data().data;
-  categoryReady=true;
-  more_note.parentNode.insertBefore(buildNote(categories),more_note);
-});
-
-/*
-<div class="note">
-  <div class="search">
-    <input type="text" class="search-input" placeholder="type category"></input>
-    <div class="suggestions">
-      <ul>
-      <li> ${doc.data().TITLE} </li>
-      <li class="hidden add-category"></li>
-      </ul>
-    </div>
-  </div>
-  <input type="text" class="content" placeholder="content"></input>
-</div>
-*/
-
-
 
 function buildNote(category) {
   const result = document.createElement("div");
@@ -60,6 +42,14 @@ function buildNote(category) {
   result.appendChild(buildSearch());
   result.appendChild(document.createElement("hr"));
   result.appendChild(buildTextarea("text","content","content"));
+
+  const submit = document.createElement("button");
+  submit.type="submit";
+  submit.className = "submit-notes";
+  submit.innerHTML="Push";
+  submit.addEventListener("click",handleSubmit);
+  result.appendChild(submit);
+  result.appendChild(createHideButton());
 
   const add_cat = result.querySelectorAll("li.add-category");
   for(obj of add_cat) {obj.addEventListener("click",handleAddCategory);}
@@ -87,7 +77,7 @@ function buildSearch() {
   for(category of categories) {
     let child = buildNoteLi(suggestions, category);
     ul.appendChild(child);
-  } 
+  }
   suggestions.appendChild(ul);
 
   result.appendChild(suggestions);
@@ -97,11 +87,37 @@ function buildSearch() {
     show(suggestions);
   });
   result.addEventListener("keydown",(evt)=>{
+    const source = evt.srcElement;
+
     if(evt.code=="Enter") {
-      hide(suggestions);
-      const source = evt.srcElement;
-      if(source.parentNode.getElementsByClassName("selected-cat").length!=0) source.placeholder="";
+      const li_list =  source.parentNode.querySelectorAll("li:not(.hidden)");
+
+      for(i=0;i<li_list.length;i++) {
+        if(li_list[i].textContent===source.value) {
+          li_list[i].click();
+          break;
+        }
+      }
+      handleSearchInput(evt);
     }
+    else if(evt.code=="Escape") {
+      hide(suggestions);
+      source.value="";
+    }
+    else if(evt.code =="Backspace") {
+      if(source.value=="") {
+        const selected_list = source.parentNode.getElementsByClassName("selected-cat");
+        source.parentNode.removeChild(selected_list[selected_list.length-1]);
+        handleSearchInput(evt);
+      }
+    }
+    else if(evt.code =="Tab") {
+      evt.preventDefault();
+        source.value = autoCompleteSuggestion(source.value);
+    }
+
+    else show(suggestions);
+
   });
 
 
@@ -116,6 +132,7 @@ function buildInput(type, placeholder, className) {
 
   return result;
 }
+
 function buildTextarea(type, placeholder, className) {
   const result = document.createElement("textarea");
   result.type = type;
@@ -124,6 +141,7 @@ function buildTextarea(type, placeholder, className) {
 
   return result;
 }
+
 function buildNoteLi(suggestions, content) {
   let li = document.createElement("li");
   li.innerHTML=content;
@@ -134,12 +152,11 @@ function buildNoteLi(suggestions, content) {
   return li;
 }
 
-
 function handleSearchInput(evt) {
     const source = evt.srcElement;
     const add_cat = source.parentNode.querySelector("li.add-category");
     const suggestions_li = add_cat.parentNode.getElementsByTagName("li");
-    const selected_cats = source.parentNode.getElementsByClassName("selected-cat");
+    const selected_list = source.parentNode.getElementsByClassName("selected-cat");
     add_cat.innerHTML =source.value;
 
     let flag=0;
@@ -147,7 +164,7 @@ function handleSearchInput(evt) {
       const li = suggestions_li[i]  ;
       onlyShowIf(li.textContent.includes(source.value),li);
       if(li.textContent==source.value) flag++;
-      for(selected of selected_cats) {
+      for(selected of selected_list) {
         onlyShowIf(selected.innerHTML!=li.textContent, li);
       }
     }
@@ -162,6 +179,7 @@ function handleAddCategory(evt) {
   /*update notes/categories in firestore*/
   db.collection('notes').doc('categories').get().then((catDoc)=>{
     const former_cats = catDoc.data().data;
+
     db.collection('notes').doc('categories').update({
         data : [...former_cats,new_cat_name]
       }).catch((error) => {
@@ -171,8 +189,11 @@ function handleAddCategory(evt) {
 
   /*make new document of the new category and make nested collection*/
   db.collection('notes').doc(new_cat_name).set({}).then(()=>{
-    const json = new Note(firebase.firestore.FieldValue.serverTimestamp(), "Generated this category").toJson();
-    db.collection('notes').doc(new_cat_name).collection('data').doc("202022").set(json);
+    const time = new Date();
+    const json = new Note(time, ["Generated this category"]).toJson();
+    const doc_name = `${time.getFullYear()}-${time.getMonth()+1}-${time.getDate()}`;
+    console.log(doc_name);
+    db.collection('notes').doc(new_cat_name).collection('data').doc(doc_name).set(json);
   });
 
   /*update categories array on session*/
@@ -189,6 +210,45 @@ function handleAddCategory(evt) {
   addSelectedCat(evt.srcElement);
 }
 
+function handleSubmit(evt){
+  evt.preventDefault();
+
+  const source  = evt.srcElement;
+  const object  = source.parentNode;
+  const markdown = object.querySelector("textarea.content");
+  const selected_list = object.getElementsByClassName("selected-cat");
+
+  const time = new Date();
+  const content = markdown.value.split("\n").join("\\n");
+
+  const newNote = new Note(time,[content]);
+  const user = auth.currentUser;
+
+  if(user==null) {
+    alert("you should login to post a note.");
+    return;
+  }
+  const doc_name = `${time.getFullYear()}-${time.getMonth()+1}-${time.getDate()}`;
+
+  for(cat of selected_list) {
+    const cat_name = cat.innerHTML;
+    console.log("user", cat_name);
+    let json ={};
+    db.collection('notes').doc(cat_name).collection('data').doc(doc_name).get().then((docRef)=>{
+      if(docRef.exists) {
+        json = {
+          DATE : time,
+          CONTENT : [...docRef.data().CONTENT, content]
+        };
+        db.collection('notes').doc(cat_name).collection('data').doc(doc_name).update(json).then(()=>{console.log("updated")});
+      }
+      else db.collection('notes').doc(cat_name).collection('data').doc(doc_name).set(newNote.toJson()).then(()=>{console.log("added")});
+    });
+
+  }
+  object.classList.add("swift-away");
+
+}
 
 function addSelectedCat(source) {
   const result = document.createElement("div");
@@ -196,9 +256,18 @@ function addSelectedCat(source) {
   result.innerHTML = source.innerHTML;
 
   const target = source.parentNode.parentNode.parentNode;
-  target.insertBefore(result,target.firstChild);
+  const input = target.querySelector("input.search-input");
+  target.insertBefore(result,input);
+  input.value="";
+}
 
-  target.querySelector("input.search-input").value="";
+function autoCompleteSuggestion(query) {
+  let result = [];
+  for(cat of categories) {
+    if(cat.includes(query)) result.push(cat);
+  }
+
+  return result;
 }
 
 function hide(target) {target.classList.add("hidden");}

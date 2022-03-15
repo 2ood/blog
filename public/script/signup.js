@@ -1,3 +1,4 @@
+const params = new URLSearchParams(window.location.search);
 
 const signupForm = document.querySelector("form.signup");
 signupForm.addEventListener("submit", onSignupSubmit);
@@ -41,7 +42,11 @@ function onSignupSubmit(event){
       NICKNAME : nickname.value,
       POSTS : [],
     };
+
     db.collection('users').doc(user.uid).set(docData).then((docRef) => {
+      db.collection('registration').doc(params.get("key")).update({
+        USED : true
+      });
       alert("User added successfully!");
       window.location.href = './index.html';
     })
@@ -62,11 +67,17 @@ function onAuthLogined(user) {
 }
 
 function onAuthAnonymous() {
-  const params = new URLSearchParams(window.location.search);
+
+  if(!params.has("key")) {
+      alert("You don't have registration key.\n Contact manager kyungmin.official0@gmail.com");
+      window.location.href="index.html";
+      return;
+  }
   let key = params.has("key")?params.get("key"):"sample";
 
+  console.log("here");
   db.collection("registration").doc(key).get().then((doc)=>{
-    if(!(doc.exists) && doc.data().USED) {
+    if(!(doc.exists)) {
       alert("You don't have valid registration key.\n Contact manager kyungmin.official0@gmail.com");
       window.location.href="index.html";
     }
