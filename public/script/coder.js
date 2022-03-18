@@ -30,11 +30,11 @@ function onAuthLoginedCoder() {
 }
 
 function onAuthLoginedProjects() {
-  const slides_ul = document.querySelector(".slide-popout-container ul");
+  const project_slides_ul = document.querySelector("#projects ul");
   db.collection('projects').orderBy("START", "desc").get().then((querySnapshot)=>{
     let index= 0;
     querySnapshot.forEach((doc) => {
-        slides_ul.innerHTML+=`
+        project_slides_ul.innerHTML+=`
         <li index="${index++}">
           <div class="slide-div60-div40" name="${doc.data().TITLE}">
             <div>
@@ -50,7 +50,7 @@ function onAuthLoginedProjects() {
         `;
 
         storage.ref(doc.data().IMAGE).getDownloadURL().then((url) => {
-          var img = slides_ul.querySelector(`img[alt='${doc.data().IMAGE}']`);
+          var img = project_slides_ul.querySelector(`img[alt='${doc.data().IMAGE}']`);
           img.setAttribute('src', url);
         }).catch((error) => {
           console.log("error in downloading profile pic : ",error);
@@ -58,11 +58,11 @@ function onAuthLoginedProjects() {
       }
     );
   }).then(()=>{
-    const slides_li = slides_ul.getElementsByTagName("li");
+    const project_slides_li = project_slides_ul.getElementsByTagName("li");
 
-    slides_li[0].classList.add("show");
-    slides_li[0].classList.add("current");
-    if(slides_li.length>1) slides_li[1].classList.add("show");
+    project_slides_li[0].classList.add("show");
+    project_slides_li[0].classList.add("current");
+    if(project_slides_li.length>1) project_slides_li[1].classList.add("show");
   });
 
   const write = document.querySelector("button[name='add-project']");

@@ -35,7 +35,7 @@ function slideMove(evt) {
   const parent = evt.srcElement.parentNode;
 
   const slides = parent.querySelectorAll("ul > li");
-  const current_slide =  parent.querySelector(".current");
+  const current_slide =  parent.querySelector(".current");  
   const current_index = parseInt(current_slide.getAttribute('index'));
 
   let next_index = 0;
