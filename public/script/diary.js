@@ -1,4 +1,6 @@
-class Note {
+class Note extends FirebaseData {
+  static format = ["DATE","CONTENT"];
+
     constructor (date, content) {
         this.DATE = date;
         this.CONTENT = content;

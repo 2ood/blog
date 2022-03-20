@@ -55,7 +55,7 @@ const profile = document.querySelector("a#profile");
 const nameAnchor = document.querySelector("a#name");
 
 coder.href="coder.html";
-diary.href="diary.html";
+diary.href="diary_list.html";
 posts.href="post_list.html";
 login.href=`login.html?from=${window.location.href}`;
 signup.href="signup.html";
@@ -95,7 +95,7 @@ function onAuthLoginedTopBar(user) {
 
   const nameAnchor = document.querySelector("a#name");
   nameAnchor.textContent = name;
-
+  
   db.collection('users').doc(uid).get().then((doc)=>{
     if(doc.exists){
       const name= doc.data().NAME;
