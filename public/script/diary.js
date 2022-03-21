@@ -1,4 +1,4 @@
-class Note extends FirebaseData {
+class Note {
   static format = ["DATE","CONTENT"];
 
     constructor (date, content) {
@@ -18,9 +18,11 @@ class Note extends FirebaseData {
 
 function onAuthLogined(user) {
   onAuthLoginedTopBar(user);
-  db.collection('notes').doc("categories").get().then((doc)=>{
+
+  StaticFirebase.util.pathToRef(['notes','categories']).get().then((doc)=>{
     categories = doc.data().data;
     categoryReady=true;
+    console.log("category ready");
     more_note.parentNode.insertBefore(buildNote(categories),more_note);
   });
 }

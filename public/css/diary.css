@@ -58,7 +58,6 @@ textarea.content {
 .note {
   margin-bottom : 15px;
   padding : 3px;
-  display: block;
   position : relative;
   overflow-x: hidden;
   max-height : 300px;

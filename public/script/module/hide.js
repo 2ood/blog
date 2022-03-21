@@ -6,8 +6,9 @@ function createHideButton(content) {
   result.className="hide-button";
   result.innerHTML = inner;
   result.addEventListener("click",(evt)=>{
-
     evt.srcElement.parentNode.classList.add("hidden");
+    console.log(evt.srcElement);
+    console.log("hide");
   });
 
   return result;
