@@ -18,6 +18,7 @@ html{
   height : 100%;
 }
 
+
 body {
   position: relative;
   height: auto;
@@ -38,6 +39,10 @@ ul li {position : relative;}
 h1 {
   display:inline-block;
   margin : 10px 0;
+}
+
+code {
+  background-color: var(--gray-half-transparent);
 }
 
 #content {
