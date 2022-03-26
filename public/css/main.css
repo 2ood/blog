@@ -43,6 +43,10 @@ h1 {
 
 code {
   background-color: var(--gray-half-transparent);
+  display: block;
+  padding: 15px;
+  border-radius: 3px;
+  color: white;
 }
 
 #content {
