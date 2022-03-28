@@ -1,3 +1,37 @@
+class Profile {
+  static format = ["BIO","EMAIL","NAME","NICKNAME","PIC","POSTS"];
+
+  constructor (bio, email, name, nickname, pic, posts) {
+      this.BIO = bio;
+      this.EMAIL = email;
+      this.NAME = name;
+      this.NICKNAME = nickname;
+      this.PIC = pic;
+      this.POSTS = posts;
+  }
+  static fromJson(json) {
+    return new Profile(json.BIO, json.EMAIL, json.NAME, json.NICKNAME, json.PIC, json.POSTS);
+  }
+  toString() {
+      return this.BIO+", "+
+      this.EMAIL+", "+
+      this.NAME+", "+
+      this.NICKNAME+", "+
+      this.PIC+", "+
+      this.POSTS;
+  }
+  toJson() {
+      return {
+        BIO : this.BIO,
+        EMAIL : this.EMAIL,
+        NAME : this.NAME,
+        NICKNAME : this.NICKNAME,
+        PIC : this.PIC,
+        POSTS : this.POSTS
+        };
+  }
+}
+
 function onAuthLogined(user) {
   onAuthLoginedTopBar(user);
   onAuthLoginedProfile(user);
@@ -46,37 +80,41 @@ function onAuthLoginedProfile(user) {
 });
 
   /*load profile data*/
+  initializeScrollContainer();
   db.collection('users').where("NICKNAME", "==", nickname).get().then((querySnapshot)=>{
     querySnapshot.forEach((doc)=>{
-      const posts_db = doc.data().POSTS;
-      const name_db = doc.data().NAME;
-      const nickname_db = doc.data().NICKNAME;
-      const bio_db = doc.data().BIO;
+      const profile  = Profile.fromJson(doc.data());
 
-      profile_nickname.value=nickname_db;
-      profile_bio.value=bio_db;
-      profile_name.textContent=name_db;
+      profile_nickname.value=profile.NICKNAME;
+      profile_bio.value=profile.BIO;
+      profile_name.textContent=profile.NAME;
 
       const ul = document.querySelector(".slide-horiz-scroll-container[name='posts'] ul");
 
-      for(i=0;i<posts_db.length;i++) {
-        db.collection('posts').doc(posts_db[i]).get().then((postDoc)=>{
-          const img_source = "img/sample_image_landscape.jpg";
-          const post_title = postDoc.data().TITLE;
-          const post_summary = postDoc.data().SUMMARY;
-          ul.innerHTML+=`<li>
-            <div class="slide-div60-div40">
-              <div><img src="${img_source}"/></div>
-              <div>
-                <h4>${post_title}</h4>
-                <p>${post_summary}</p>
-              </div>
-            </div>
-          </li>`;
+      for(i=0;i<profile.POSTS.length;i++) {
+        db.collection('posts').doc(profile.POSTS[i]).get().then((doc)=>{
+          ul.appendChild(buildPosts(doc.data()));
         });
       }
     });
   });
+}
+
+function buildPosts(json) {
+  const result = document.createElement("li");
+  result.className="slide-div60-div40";
+  result.innerHTML=`
+  <div>
+    <img src="img/sample_image_landscape.jpg"/>
+  </div>
+  <div>
+    <h4>${json.TITLE}</h4>
+    <p>${json.SUMMARY}</p>
+  </div>
+  `;
+
+  return result;
+
 }
 
 function handleEditButton(evt) {

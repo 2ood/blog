@@ -44,11 +44,13 @@ function onAuthLoginedCoder() {
 function onAuthLoginedProjects() {
   const project_slides_ul = document.querySelector("#projects ul");
   const upcoming_slides_ul = document.querySelector("#upcoming ul");
+  initializeSlideContainers();
   buildSlides(project_slides_ul, StaticFirebase.util.pathToRef(['projects']), projectTemplate, storage);
   buildSlides(upcoming_slides_ul, StaticFirebase.util.pathToRef(['upcoming-projects']), projectTemplate, storage);
 }
 
 function projectTemplate(index, json, storage) {
+
   const result = document.createElement("li");
   result.setAttribute("index",index);
   result.innerHTML=`

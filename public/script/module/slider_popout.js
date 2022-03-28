@@ -1,8 +1,14 @@
+/*
+How to use
 
+1. initialize the containers
+initializeSlideContainers();
 
-initializeSlideContainer();
+2. build(=add) slides to each uls
+buildSlides(project_slides_ul, StaticFirebase.util.pathToRef(['projects']), projectTemplate, storage);
+*/
 
-function initializeSlideContainer() {
+function initializeSlideContainers() {
   const slides = document.getElementsByClassName("slide-popout-container");
   for(i=0;i<slides.length;i++){
     const right = createSlideButton(true);

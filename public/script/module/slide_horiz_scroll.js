@@ -1,5 +1,4 @@
 
-initializeSlideContainer();
 
 function initializeScrollContainer() {
   const scrollContainer = document.getElementsByClassName("slide-horiz-scroll-container");
