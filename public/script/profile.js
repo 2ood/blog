@@ -118,22 +118,14 @@ function buildPosts(json) {
 }
 
 function handleEditButton(evt) {
-  const inputs = document.querySelectorAll(".column-left input");
-  edit_profile_button.classList.add("hidden");
-  save_button.classList.remove("hidden");
-  discard_button.classList.remove("hidden");
-  profile_pic_input_label.classList.remove("hidden");
-
-  profile_nickname.disabled = false;
-  profile_bio.disabled = false;
-  profile_pic_input.disabled = false;
-  profile_nickname.placeholder=profile_nickname.value;
-  profile_bio.placeholder=profile_bio.value;
+  toggleEditMode(true);
 }
 
 function handleSaveButton(evt) {
+  //!TODO
+  // porifle pic is not sending properly.
+  
   const user = auth.currentUser;
-  console.log(user.uid);
   db.collection('users').doc(user.uid).get().then((doc)=>{
       my_nickname = doc.data().NICKNAME;
       if(my_nickname==nickname) {
@@ -144,23 +136,33 @@ function handleSaveButton(evt) {
           BIO : bio_new,
           NICKNAME : nickname_new,
           PIC : pic_new
-        });
+        }).then(()=>{toggleEditMode(false);});
       }
   });
 }
 
 function handleDiscardButton(evt) {
   if(confirm("Do you want to cancel editing?\nUnsaved changes are discared.")) {
-    const inputs = document.querySelectorAll(".column-left input");
-    edit_profile_button.classList.remove("hidden");
-    save_button.classList.add("hidden");
-    discard_button.classList.add("hidden");
-    profile_pic_input_label.classList.add("hidden");
+    toggleEditMode(false);
+  }
+}
 
-    profile_nickname.disabled = true;
-    profile_bio.disabled = true;
-    profile_pic_input.disabled = true;
+function toggleEditMode(isEnteringEditMode) {
+  if(isEnteringEditMode) {
+    profile_nickname.placeholder=profile_nickname.value;
+    profile_bio.placeholder=profile_bio.value;
+  } else {
     profile_nickname.value=profile_nickname.placeholder;
     profile_bio.value=profile_bio.placeholder;
   }
+
+  edit_profile_button.classList.toggle("hidden");
+  save_button.classList.toggle("hidden");
+  discard_button.classList.toggle("hidden");
+  profile_pic_input_label.classList.toggle("hidden");
+
+  profile_nickname.disabled = !isEnteringEditMode;
+  profile_bio.disabled = !isEnteringEditMode;
+  profile_pic_input.disabled = !isEnteringEditMode;
+
 }

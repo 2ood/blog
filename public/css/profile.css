@@ -40,7 +40,7 @@
   color : var(--grayscale);
   flex-wrap: wrap;
   word-wrap: break-word;
-  overflow: scroll;
+  overflow: hidden;
 }
 
 #profile-nickname {
