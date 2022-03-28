@@ -1,23 +1,54 @@
-const slides = document.getElementsByClassName("slide-popout-container");
-for(i=0;i<slides.length;i++){
-  const right = createSlideButton(true);
-  const left = createSlideButton(false);
-  right.classList.add("hidden");
-  slides[i].insertBefore(left, parent.firstChild);
-  slides[i].insertBefore(right, parent.null);
+
+
+initializeSlideContainer();
+
+function initializeSlideContainer() {
+  const slides = document.getElementsByClassName("slide-popout-container");
+  for(i=0;i<slides.length;i++){
+    const right = createSlideButton(true);
+    const left = createSlideButton(false);
+    right.classList.add("hidden");
+    slides[i].insertBefore(left, parent.firstChild);
+    slides[i].insertBefore(right, parent.null);
+  }
+
+  const slide_left_buttons = document.querySelectorAll(".slide-button[name='left']");
+  const slide_right_buttons = document.querySelectorAll(".slide-button[name='right']");
+
+  for(i=0;i<slide_right_buttons.length;i++) {
+    slide_right_buttons[i].addEventListener("click",slideMove);
+    slide_right_buttons[i].isForward = true;
+  }
+
+  for(i=0;i<slide_left_buttons.length;i++) {
+    slide_left_buttons[i].addEventListener("click",slideMove);
+    slide_left_buttons[i].isForward = false;
+  }
 }
 
-const slide_left_buttons = document.querySelectorAll(".slide-button[name='left']");
-const slide_right_buttons = document.querySelectorAll(".slide-button[name='right']");
-
-for(i=0;i<slide_right_buttons.length;i++) {
-  slide_right_buttons[i].addEventListener("click",slideMove);
-  slide_right_buttons[i].isForward = true;
+function buildSlides(target_ul, collectionRef, templateFunc, storage) {
+  collectionRef.orderBy("START", "desc").get().then((querySnapshot)=>{
+    let index= 0;
+    querySnapshot.forEach((doc) => {
+        target_ul.appendChild(templateFunc(index++, doc.data(), storage));
+      }
+    );
+  }).then(()=>{
+    initializeStartingSlide(target_ul);
+    const write = document.querySelector("button[name='add-project']");
+    write.addEventListener('click',(event)=>{
+      event.preventDefault();
+      window.location.href="project_write.html";
+    });
+  });
 }
 
-for(i=0;i<slide_left_buttons.length;i++) {
-  slide_left_buttons[i].addEventListener("click",slideMove);
-  slide_left_buttons[i].isForward = false;
+function initializeStartingSlide(target_ul){
+  const target_li = target_ul.getElementsByTagName("li");
+
+  target_li[0].classList.add("show");
+  target_li[0].classList.add("current");
+  if(target_li.length>1) target_li[1].classList.add("show");
 }
 
 function createSlideButton(isForward){
@@ -35,7 +66,7 @@ function slideMove(evt) {
   const parent = evt.srcElement.parentNode;
 
   const slides = parent.querySelectorAll("ul > li");
-  const current_slide =  parent.querySelector(".current");  
+  const current_slide =  parent.querySelector(".current");
   const current_index = parseInt(current_slide.getAttribute('index'));
 
   let next_index = 0;

@@ -44,42 +44,14 @@ function onAuthLoginedCoder() {
 function onAuthLoginedProjects() {
   const project_slides_ul = document.querySelector("#projects ul");
   const upcoming_slides_ul = document.querySelector("#upcoming ul");
-  buildSlides(project_slides_ul, StaticFirebase.util.pathToRef(['projects']), projectTemplate);
-  buildSlides(upcoming_slides_ul, StaticFirebase.util.pathToRef(['upcoming-projects']), projectTemplate);
+  buildSlides(project_slides_ul, StaticFirebase.util.pathToRef(['projects']), projectTemplate, storage);
+  buildSlides(upcoming_slides_ul, StaticFirebase.util.pathToRef(['upcoming-projects']), projectTemplate, storage);
 }
 
-function buildSlides(target_ul, collectionRef, templateFunc) {
-  collectionRef.orderBy("START", "desc").get().then((querySnapshot)=>{
-    let index= 0;
-    querySnapshot.forEach((doc) => {
-        target_ul.innerHTML+=projectTemplate(index++, doc.data());
-        storage.ref(doc.data().IMAGE).getDownloadURL().then((url) => {
-          var img = target_ul.querySelector(`img[alt='${doc.data().IMAGE}']`);
-          img.setAttribute('src', url);
-        }).catch((error) => {
-          console.log("error in downloading profile pic : ",error);
-        });
-
-      }
-    );
-  }).then(()=>{
-  const target_li = target_ul.getElementsByTagName("li");
-
-  target_li[0].classList.add("show");
-  target_li[0].classList.add("current");
-  if(target_li.length>1) target_li[1].classList.add("show");
-
-  const write = document.querySelector("button[name='add-project']");
-  write.addEventListener('click',(event)=>{
-    event.preventDefault();
-    window.location.href="project_write.html";
-  });
-  });
-}
-
-function projectTemplate(index, json) {
-  return `
-  <li index="${index}">
+function projectTemplate(index, json, storage) {
+  const result = document.createElement("li");
+  result.setAttribute("index",index);
+  result.innerHTML=`
     <div class="slide-div60-div40" name="${json.TITLE}">
       <div>
         <img src="#" alt="${json.IMAGE}"/>
@@ -90,6 +62,14 @@ function projectTemplate(index, json) {
         <a class="show-more-github" href="${json.HREF}">show more</a>
       </div>
     </div>
-  </li>
   `;
+
+  storage.ref(json.IMAGE).getDownloadURL().then((url) => {
+    var img = result.querySelector(`img[alt='${json.IMAGE}']`);
+    img.setAttribute('src', url);
+  }).catch((error) => {
+    console.log("error in downloading profile pic :",error);
+  });
+
+  return result;
 }

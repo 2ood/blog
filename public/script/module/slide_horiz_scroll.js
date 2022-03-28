@@ -1,6 +1,13 @@
-const scrollContainer = document.querySelector(".slide-horiz-scroll-container");
 
-scrollContainer.addEventListener("wheel", (event) => {
-    event.preventDefault();
-    scrollContainer.scrollLeft += event.deltaY*0.3;
-});
+initializeSlideContainer();
+
+function initializeScrollContainer() {
+  const scrollContainer = document.getElementsByClassName("slide-horiz-scroll-container");
+
+  for( s of scrollContainer) {
+    s.addEventListener("wheel", (event) => {
+        event.preventDefault();
+        scrollContainer.scrollLeft += event.deltaY*0.3;
+    });
+  }
+}
