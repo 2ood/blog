@@ -85,12 +85,13 @@ function onAuthLoginedProfile(user) {
     querySnapshot.forEach((doc)=>{
       const profile  = Profile.fromJson(doc.data());
 
+      /*load profile data to the elements*/
       profile_nickname.value=profile.NICKNAME;
       profile_bio.value=profile.BIO;
       profile_name.textContent=profile.NAME;
 
+      /*load posts data*/
       const ul = document.querySelector(".slide-horiz-scroll-container[name='posts'] ul");
-
       for(i=0;i<profile.POSTS.length;i++) {
         db.collection('posts').doc(profile.POSTS[i]).get().then((doc)=>{
           ul.appendChild(buildPosts(doc.data()));
@@ -103,11 +104,8 @@ function onAuthLoginedProfile(user) {
 function buildPosts(json) {
   const result = document.createElement("li");
   result.className="slide-div60-div40";
-  result.innerHTML=`
-  <div>
-    <img src="img/sample_image_landscape.jpg"/>
-  </div>
-  <div>
+  result.innerHTML=`<img class="first-part" src="img/sample_image_landscape.jpg"/>
+  <div class="second-part">
     <h4>${json.TITLE}</h4>
     <p>${json.SUMMARY}</p>
   </div>
@@ -124,7 +122,7 @@ function handleEditButton(evt) {
 function handleSaveButton(evt) {
   //!TODO
   // porifle pic is not sending properly.
-  
+
   const user = auth.currentUser;
   db.collection('users').doc(user.uid).get().then((doc)=>{
       my_nickname = doc.data().NICKNAME;

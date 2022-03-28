@@ -66,7 +66,6 @@ function createSlideButton(isForward){
 }
 
 
-
 function slideMove(evt) {
   let isForward = evt.srcElement.isForward;
   const parent = evt.srcElement.parentNode;
