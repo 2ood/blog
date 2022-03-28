@@ -93,26 +93,31 @@ function onAuthLoginedProfile(user) {
       /*load posts data*/
       const ul = document.querySelector(".slide-horiz-scroll-container[name='posts'] ul");
       for(i=0;i<profile.POSTS.length;i++) {
-        db.collection('posts').doc(profile.POSTS[i]).get().then((doc)=>{
-          ul.appendChild(buildPosts(doc.data()));
+        const post_name= profile.POSTS[i];
+        db.collection('posts').doc(post_name).get().then((doc)=>{
+          ul.appendChild(buildPosts(doc.data(),post_name));
         });
       }
     });
   });
 }
 
-function buildPosts(json) {
+function buildPosts(json, name) {
   const result = document.createElement("li");
   result.className="slide-div60-div40";
-  result.innerHTML=`<img class="first-part" src="img/sample_image_landscape.jpg"/>
+  result.innerHTML=`
+  <img class="first-part" src="img/sample_image_landscape.jpg"/>
   <div class="second-part">
     <h4>${json.TITLE}</h4>
     <p>${json.SUMMARY}</p>
   </div>
   `;
 
-  return result;
+  result.addEventListener("click",()=>{
+    window.location.href=`post.html?id=${name}`;
+  });
 
+  return result;
 }
 
 function handleEditButton(evt) {
