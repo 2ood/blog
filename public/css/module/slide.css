@@ -1,4 +1,6 @@
-
+.slide-div60-div40 {
+  height : 100%;
+}
 .slide-div60-div40 > .first-part {
   height : 60%;
   width : 100%;
@@ -11,8 +13,12 @@
   padding : 10px;
 }
 
-.second-part * {
+.first-part img {
+  height : 100%;
   width : 100%;
+}
+
+.second-part * {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;

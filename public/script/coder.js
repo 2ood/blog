@@ -55,10 +55,10 @@ function projectTemplate(index, json, storage) {
   result.setAttribute("index",index);
   result.innerHTML=`
     <div class="slide-div60-div40" name="${json.TITLE}">
-      <div>
+      <div class="first-part">
         <img src="#" alt="${json.IMAGE}"/>
       </div>
-      <div>
+      <div class="second-part">
         <h3>${json.TITLE}</h3>
         <p>${json.SUMMARY}</p>
         <a class="show-more-github" href="${json.HREF}">show more</a>
