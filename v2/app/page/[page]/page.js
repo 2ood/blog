@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { getPaginatedPosts } from '../../../lib/notion';
 import Text from '../../../components/text';
 import styles from '../../../styles/index.module.css';
+import { FaLock } from 'react-icons/fa';
 
 const POSTS_PER_PAGE = parseInt(process.env.POSTS_PER_PAGE || '5', 10);
 
@@ -62,12 +63,14 @@ export default async function Page({ params }) {
             year: 'numeric',
           });
           const slug = post.properties?.Slug?.rich_text?.[0]?.text?.content;
+          const isConfidential = post.properties?.Status.status.name === 'Confidential';
           return (
             <li key={post.id} className={styles.post}>
               <h3 className={styles.postTitle}>
                 <Link href={`/article/${slug}`}>
                   <Text title={post.properties?.Title?.title} />
                 </Link>
+                {isConfidential && <FaLock className={styles.lockIcon} />}
               </h3>
               <div className={styles.cardInfoGroup}>
                 <p className={styles.postDescription}>{date}</p>

@@ -1,0 +1,35 @@
+.notFoundContainer {
+    min-height: 50vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #333;
+    padding: 0 20px;
+  }
+  
+  .notFoundHeading {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-top : 3rem;
+    margin-bottom: 1rem;
+  }
+  
+  .notFoundMessage {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+  }
+  
+  .notFoundLink {
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    color: #fff;
+    background-color: #0070f3;
+    text-decoration: none;
+    border-radius: 5px;
+  }
+  
+  .notFoundLink:hover {
+    background-color: #005ad1;
+  }

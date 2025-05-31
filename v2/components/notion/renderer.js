@@ -165,6 +165,44 @@ export function renderBlock(block) {
     case 'column': {
       return <div>{block.children.map((child) => renderBlock(child))}</div>;
     }
+    case 'video': {
+      let videoSrc =
+        value.type === 'external' ? value.external.url : value.file.url;
+      const caption = value.caption?.[0]?.plain_text;
+
+      const youtubeMatch = videoSrc.match(/^https:\/\/youtu\.be\/([\w-]+)/);
+      if (youtubeMatch) {
+        const videoId = youtubeMatch[1];
+        videoSrc = `https://www.youtube.com/embed/${videoId}`;
+      }
+      
+      return (
+        <figure className={styles.video}>
+          <iframe width="560" height="315" src={videoSrc} title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
+          {caption && <figcaption>{caption}</figcaption>}
+        </figure>
+      );
+    }
+    case 'callout': {
+      
+      const icon = value.icon?.emoji || '💡';
+      const colorClass = value.color ? value.color.replace('_background', '') : 'default';
+      const isSingleLine =
+        value.rich_text.length === 1 &&
+        !value.rich_text[0].plain_text.includes('\n');
+
+      const alignmentClass = isSingleLine ? styles.calloutCenter : '';
+    
+      return (
+        <div className={`${styles.callout} ${styles[`callout_${colorClass}`]} ${alignmentClass}`} key={id}>
+          <span className={styles.calloutIcon}>{icon}</span>
+          <div className={styles.calloutText}>
+            <Text title={value.rich_text} />
+          </div>
+        </div>
+      );
+    }
+    
     default:
       return `❌ Unsupported block (${
         type === 'unsupported' ? 'unsupported by Notion API' : type
