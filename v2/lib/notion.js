@@ -36,9 +36,9 @@ export async function getDatabase() {
       start_cursor: cursor,
       filter: {
         property: 'Status',
-        "status": {
-          "equals": "Published"
-        }
+        status: {
+          equals: 'Published',
+        },
       },
       sorts: [
         {
