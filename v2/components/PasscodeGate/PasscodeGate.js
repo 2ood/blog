@@ -3,16 +3,30 @@
 import { useState } from 'react';
 import styles from './passcodeGate.module.css';
 
-export default function PasscodeGate({ onAccessGranted, correctCode = 'passcode123' }) {
+export default function PasscodeGate({ onAccessGranted, slug }) {
   const [passcode, setPasscode] = useState('');
   const [error, setError] = useState('');
 
-  const handleSubmit = (e) => {
-    e.preventDefault(); // 🔸 form의 기본 제출 막기
-    if (passcode === correctCode) {
-      onAccessGranted();
-    } else {
-      setError('Incorrect passcode.');
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError('');
+  
+    try {
+      const res = await fetch('/api/check-passcode', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ slug, passcode }),
+      });
+  
+      const data = await res.json();
+  
+      if (data.valid) {
+        onAccessGranted();
+      } else {
+        setError('Incorrect passcode.');
+      }
+    } catch (err) {
+      setError('Server error. Please try again.');
     }
   };
 

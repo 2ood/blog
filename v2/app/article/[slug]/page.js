@@ -22,9 +22,9 @@ export async function generateStaticParams() {
 }
 
 export default async function Page({ params }) {
-  if (!params || typeof params.slug !== 'string') return notFound();
+  if (!params || typeof params?.slug !== 'string') return notFound();
 
-  const page = await getPageFromSlug(params.slug);
+  const page = await getPageFromSlug(params?.slug);
   if (!page) return notFound();
 
   const blocks = await getBlocks(page.id);
@@ -32,16 +32,15 @@ export default async function Page({ params }) {
 
   const { prev, next } = await getAdjacentArticles(params.slug);
 
-  console.log(blocks);
   const isConfidential = page.properties?.Status.status.name === 'Confidential';
   const date = new Date(page.properties?.Written.date.start).toLocaleString('en-US', {
     month: 'short',
     day: '2-digit',
     year: 'numeric',
   });
-  const passcode = page.properties?.Passcode.rich_text[0]?.plain_text ?? '';
+  
   return (
-    <PasscodeWrapper isConfidential={isConfidential} passcode={passcode}>
+    <PasscodeWrapper isConfidential={isConfidential} slug={params?.slug}>
       <Head>
         <title>{page.properties.Title?.title[0].plain_text}</title>
         <link rel="icon" href="/favicon.ico" />

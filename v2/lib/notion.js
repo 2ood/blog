@@ -227,3 +227,29 @@ export async function postComment({ slug, name, content }) {
     },
   });
 }
+
+export const checkPasscodeFromSlug = cache(async (slug, passcodeChallenge) => {
+  const databaseId = process.env.NOTION_DATABASE_PASSCODES_ID;
+
+  const response = await notion.databases.query({
+    database_id: databaseId,
+    filter: {
+      and: [
+        {
+          property: 'Slug',
+          title: {
+            equals: slug,
+          },
+        },
+        {
+          property: 'Passcode',
+          rich_text: {
+            equals: passcodeChallenge,
+          },
+        },
+      ],
+    }
+  });
+
+  return response?.results.length > 0;
+});
