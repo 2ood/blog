@@ -33,7 +33,7 @@ export default function CommentSection({ slug }) {
         {comments.map((comment) => (
           <div className={styles.commentCard} key={comment.id}>
             <div className={styles.commentAuthor}>{comment.name}</div>
-            <div className={styles.commentContent}>{comment.content}</div>
+            <pre className={styles.commentContent}>{comment.content}</pre>
           </div>
         ))}
         {comments.length === 0 && <p>첫 댓글을 남겨보세요!</p>}
