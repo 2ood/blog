@@ -34,6 +34,12 @@ export async function getDatabase() {
       database_id: process.env.NOTION_DATABASE_ID,
       page_size: 100,
       start_cursor: cursor,
+      filter: {
+        property: 'Status',
+        "status": {
+          "equals": "Published"
+        }
+      },
       sorts: [
         {
           property: 'Written',

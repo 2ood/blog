@@ -55,7 +55,7 @@ export default async function Page({ params }) {
         )
       </h2>
       <ol className={styles.posts}>
-        {posts.map((post) => {
+        {posts.map((post) => {      
           const date = new Date(post.properties?.Written.date.start).toLocaleString('en-US', {
             month: 'short',
             day: '2-digit',
