@@ -1,8 +1,6 @@
 import { Fragment } from 'react';
 import Link from 'next/link';
 
-import Image from 'next/image';
-
 import Text from '../text';
 import styles from '../../styles/post.module.css';
 
@@ -81,9 +79,10 @@ export function renderBlock(block) {
     case 'image': {
       const src = value.type === 'external' ? value.external.url : value.file.url;
       const caption = value.caption ? value.caption[0]?.plain_text : '';
+      // eslint-disable-next-line @next/next/no-img-element
       return (
         <figure>
-          <Image src={src} alt={caption} />
+          <img src={src} alt={caption} />
           {caption && <figcaption>{caption}</figcaption>}
         </figure>
       );
