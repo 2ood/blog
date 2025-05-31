@@ -29,6 +29,7 @@ export async function getDatabase() {
   let cursor;
 
   while (hasMore) {
+    // eslint-disable-next-line no-await-in-loop
     const response = await notion.databases.query({
       database_id: process.env.NOTION_DATABASE_ID,
       page_size: 100,
@@ -144,7 +145,7 @@ export const getBlocks = cache(async (blockID) => {
 
 export async function getAdjacentArticles(currentSlug) {
   const slugNum = parseInt(currentSlug, 10);
-  if (isNaN(slugNum)) return { prev: null, next: null };
+  if (Number.isNaN(slugNum)) return { prev: null, next: null };
 
   const prevPage = await getPageFromSlug(String(slugNum - 1));
   const nextPage = await getPageFromSlug(String(slugNum + 1));
