@@ -1,6 +1,7 @@
+/* eslint-disable import/prefer-default-export */
 import { checkPasscodeFromSlug } from '../../../lib/notion';
 
-export default async function POST(req) {
+export async function POST(req) {
   const { slug, passcode } = await req.json();
 
   const isValid = await checkPasscodeFromSlug(slug, passcode);
