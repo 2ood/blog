@@ -1,10 +1,9 @@
 import { Fragment } from 'react';
 import Head from 'next/head';
-import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
 import {
-  getDatabase, getBlocks, getPageFromSlug, getAdjacentArticles 
+  getDatabase, getBlocks, getPageFromSlug, getAdjacentArticles,
 } from '../../../lib/notion';
 import Text from '../../../components/text';
 import { renderBlock } from '../../../components/notion/renderer';
@@ -23,18 +22,17 @@ export async function generateStaticParams() {
 }
 
 export default async function Page({ params }) {
-
   if (!params || typeof params.slug !== 'string') {
     return <div>Invalid route parameter</div>;
   }
 
   const page = await getPageFromSlug(params?.slug);
-  
-  if (!page) {notFound();}
+
+  if (!page) { notFound(); }
 
   const blocks = await getBlocks(page?.id);
-  if (!blocks || !blocks.length) {notFound(); }
-  
+  if (!blocks || !blocks.length) { notFound(); }
+
   const { prev, next } = await getAdjacentArticles(params?.slug);
 
   const date = new Date(page.properties?.Written.date.start).toLocaleString('en-US', {
@@ -68,7 +66,6 @@ export default async function Page({ params }) {
     </div>
   );
 }
-
 
 // export const getStaticPaths = async () => {
 //   const database = await getDatabase(databaseId);

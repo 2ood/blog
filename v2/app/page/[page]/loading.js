@@ -11,7 +11,7 @@ export default function Loading() {
       <h2 className={styles.heading}>All Posts</h2>
 
       <div className={styles.loaderWrapper}>
-        <div className={styles.spinner}></div>
+        <div className={styles.spinner} />
         <p className={styles.loadingText}>Loading posts...</p>
       </div>
     </main>

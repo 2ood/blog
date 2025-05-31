@@ -1,6 +1,8 @@
 import { Fragment } from 'react';
 import Link from 'next/link';
 
+import Image from 'next/image';
+
 import Text from '../text';
 import styles from '../../styles/post.module.css';
 
@@ -81,7 +83,7 @@ export function renderBlock(block) {
       const caption = value.caption ? value.caption[0]?.plain_text : '';
       return (
         <figure>
-          <img src={src} alt={caption} />
+          <Image src={src} alt={caption} />
           {caption && <figcaption>{caption}</figcaption>}
         </figure>
       );

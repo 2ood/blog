@@ -26,7 +26,7 @@ const notion = new Client({
 export async function getDatabase() {
   const results = [];
   let hasMore = true;
-  let cursor = undefined;
+  let cursor;
 
   while (hasMore) {
     const response = await notion.databases.query({
@@ -124,9 +124,9 @@ export const getBlocks = cache(async (blockID) => {
 
     // ✔️ quote + 다음 paragraph 병합
     else if (
-      curr.type === 'paragraph' &&
-      prev?.type === 'quote' &&
-      curr.paragraph?.rich_text?.length > 0
+      curr.type === 'paragraph'
+      && prev?.type === 'quote'
+      && curr.paragraph?.rich_text?.length > 0
     ) {
       prev.quote.rich_text.push(...curr.paragraph.rich_text);
     }
@@ -152,15 +152,15 @@ export async function getAdjacentArticles(currentSlug) {
   return {
     prev: prevPage
       ? {
-          title: prevPage.properties.Title?.title?.[0]?.plain_text || `Article ${slugNum - 1}`,
-          slug: String(slugNum - 1),
-        }
+        title: prevPage.properties.Title?.title?.[0]?.plain_text || `Article ${slugNum - 1}`,
+        slug: String(slugNum - 1),
+      }
       : null,
     next: nextPage
       ? {
-          title: nextPage.properties.Title?.title?.[0]?.plain_text || `Article ${slugNum + 1}`,
-          slug: String(slugNum + 1),
-        }
+        title: nextPage.properties.Title?.title?.[0]?.plain_text || `Article ${slugNum + 1}`,
+        slug: String(slugNum + 1),
+      }
       : null,
   };
 }
@@ -200,7 +200,7 @@ export async function getComments(slug) {
 
   console.log(response.results);
 
-  return response.results.map(page => ({
+  return response.results.map((page) => ({
     id: page.id,
     name: page.properties.name?.rich_text?.[0]?.plain_text || 'Anonymous',
     content: page.properties.content?.rich_text?.[0]?.plain_text || '',
@@ -226,5 +226,3 @@ export async function postComment({ slug, name, content }) {
     },
   });
 }
-
-
