@@ -1,0 +1,175 @@
+.container {
+  width: 100%;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 2rem;
+  font-family: sans-serif;
+}
+
+
+.header {
+  margin-bottom: 50px;
+}
+
+.header p {
+  opacity: 0.7;
+  line-height: 1.5;
+}
+
+.plus {
+  font-size: 20px;
+  margin: 0 20px;
+}
+
+.heading {
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #dedede;
+  text-transform: uppercase;
+  font-size: 15px;
+  opacity: 0.6;
+  letter-spacing: 0.5px;
+}
+
+.posts {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 1.5rem;
+}
+
+.post {
+  background-color: #fff;
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+
+.post:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+
+
+.postDescription {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 0.8rem;
+}
+
+.readPostButton {
+  color: var(--link-color);
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.readPostButton:hover {
+  text-decoration: underline;
+}
+
+.postTitle {
+  margin: 0 0 0.5rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #222;
+}
+
+.postTitle a {
+  color: inherit;    
+  text-decoration: none; 
+}
+
+.postTitle a:hover {
+  text-decoration: underline; 
+}
+
+
+.loaderWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 4rem 0;
+  color: #666;
+}
+
+.spinner {
+  width: 36px;
+  height: 36px;
+  border: 4px solid #ccc;
+  border-top: 4px solid #333;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 1rem;
+}
+
+.loadingText {
+  font-size: 1rem;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.articleLoadingContainer {
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: sans-serif;
+  color: #888;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
+
+.pageButton {
+  padding: 0.4rem 0.8rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  text-decoration: none;
+  color: #333;
+  font-size: 0.95rem;
+}
+
+.pageButton:hover {
+  background-color: #f2f2f2;
+}
+
+.currentPage {
+  font-weight: bold;
+  background-color: #0070f3;
+  color: white;
+  border-color: #0070f3;
+}
+
+.cardInfoGroup {
+  display : flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+@media (prefers-color-scheme: dark) {
+  .heading {
+    border-color: #343539;
+  }
+}
+/* ≥ 1080px 해상도에서 3열 고정 */
+@media screen and (min-width: 700px) {
+  .posts {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
