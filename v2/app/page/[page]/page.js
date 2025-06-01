@@ -71,6 +71,7 @@ export default async function Page({ params }) {
                 </Link>
                 {isConfidential && <FaLock className={styles.lockIcon} />}
               </h3>
+              <p className={styles.summary}>{post.properties.Summary?.rich_text[0]?.plain_text}</p>
               <div className={styles.cardInfoGroup}>
                 <p className={styles.postDescription}>{date}</p>
                 <Link className={styles.readPostButton} href={`/article/${slug}`}>Read post →</Link>
