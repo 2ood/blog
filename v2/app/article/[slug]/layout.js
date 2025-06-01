@@ -1,15 +1,10 @@
+import styles from '../../../styles/post.module.css';
+
 export default function ArticleLayout({ children }) {
   return (
-    <div style={{
-      maxWidth: '720px',
-      margin: '0 auto',
-      padding: '2rem',
-      backgroundColor: '#fff',
-      fontFamily: 'sans-serif',
-    }}
-    >
-      <header style={{ marginBottom: '1rem' }}>
-        <a href="/"><h1 style={{ fontSize: '1.2rem', color: '#333' }}>이우드의 블로그</h1></a>
+    <div className={styles.container}>
+      <header className={styles.header}>
+        <a href="/"><h2 className={styles.headerTitle}>이우드의 블로그</h2></a>
       </header>
       <main>
         {children}

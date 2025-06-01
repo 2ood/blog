@@ -6,7 +6,7 @@
   .title {
     font-size: 1.75rem;
     margin-bottom: 1rem;
-    color: #333;
+    color: var(--text-color);
   }
   
   .message {
@@ -40,9 +40,17 @@
     background-color: #005ecb;
   }
   
-  .error {
-    color: red;
+  .error, .checking {
     margin-top: 0.5rem;
     font-size: 0.9rem;
   }
+  .error {
+    color: red;
+  }
+
+  .checking {
+    color: green;
+  }
+
+
   

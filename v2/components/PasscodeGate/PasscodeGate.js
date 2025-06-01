@@ -6,20 +6,21 @@ import styles from './passcodeGate.module.css';
 export default function PasscodeGate({ onAccessGranted, slug }) {
   const [passcode, setPasscode] = useState('');
   const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false); // 🟡 loading state
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError('');
-  
+    setError('checking..');
+    setLoading(true); // ▶️ Start loading
+
     try {
       const res = await fetch('/api/check-passcode', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ slug, passcode }),
       });
-  
+
       const data = await res.json();
-  
       if (data.valid) {
         onAccessGranted();
       } else {
@@ -27,6 +28,8 @@ export default function PasscodeGate({ onAccessGranted, slug }) {
       }
     } catch (err) {
       setError('Server error. Please try again.');
+    } finally {
+      setLoading(false); // ⏹️ Stop loading
     }
   };
 
@@ -42,13 +45,12 @@ export default function PasscodeGate({ onAccessGranted, slug }) {
           onChange={(e) => setPasscode(e.target.value)}
           placeholder="Enter passcode"
           className={styles.input}
+          disabled={loading}
         />
-        <button type="submit" className={styles.button}>
-          Submit
-        </button>
+        <button type="submit" className={styles.button} disabled={loading}>Submit</button>
       </form>
 
-      {error && <p className={styles.error}>{error}</p>}
+      {(error || loading) && <p className={loading ? styles.checking : styles.error}>{error}</p>}
     </div>
   );
 }

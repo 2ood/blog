@@ -1,0 +1,13 @@
+
+.toggleTheme {
+    position :absolute;
+    top : 2em;
+    right : 2em;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    background: transparent;
+    cursor: pointer;
+    border : 1px solid var(--text-color);
+    color : var(--text-color)
+  }
+  

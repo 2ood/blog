@@ -49,7 +49,6 @@ export default async function Page({ params }) {
         <h1>이우드의 블로그</h1>
         <p>이우드의 글들을 모아둡니다.</p>
       </header>
-
       <h2 className={styles.heading}>
         All Posts (Page
         {currentPage}
