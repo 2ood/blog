@@ -46,7 +46,7 @@ export default async function Page({ params }) {
   return (
     <main className={styles.container}>
       <header className={styles.header}>
-        <h1>이우드의 블로그</h1>
+        <h2>이우드의 블로그</h2>
         <p>이우드의 글들을 모아둡니다.</p>
       </header>
       <h2 className={styles.heading}>
