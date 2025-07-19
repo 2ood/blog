@@ -42,6 +42,7 @@
 .postTitle {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   gap: 1em;
   font-size: 1.25rem;
   font-weight: 600;
@@ -93,6 +94,18 @@
   background-color: #0070f3;
   color: white;
   border-color: #0070f3;
+}
+
+.recent {
+  font-size: .7em;
+  color : #ff8c00;
+  margin : 0;
+}
+
+.upcoming {
+  font-size: .7em;
+  color : #1bc102;
+  margin : 0;
 }
 
 /* Loader */
