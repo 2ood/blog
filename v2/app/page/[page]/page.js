@@ -46,7 +46,7 @@ function isWithinTwoWeeks(dateString) {
   inputDate.setHours(0, 0, 0, 0);
 
   const twoWeeksInMs = 14 * 24 * 60 * 60 * 1000;
-  const timeDifference = today-inputDate ;
+  const timeDifference = today - inputDate;
 
   // Check if the date is between today and 14 days from now (inclusive)
   return timeDifference >= 0 && timeDifference <= twoWeeksInMs;
@@ -70,7 +70,7 @@ export default async function Page({ params }) {
         )
       </h2>
       <ol className={styles.posts}>
-        {posts.map((post,index) => {      
+        {posts.map((post, index) => {      
           const date = new Date(post.properties?.Written.date.start).toLocaleString('en-US', {
             month: 'short',
             day: '2-digit',
@@ -80,21 +80,24 @@ export default async function Page({ params }) {
           const writtenDate = post.properties?.Written.date.start;
           const isConfidential = post.properties?.Status.status.name === 'Confidential';
           const isInProgress = post.properties?.Status.status.name === 'In progress';
-          const isRecentlyReleased = (!isInProgress) && isWithinTwoWeeks(writtenDate)
+          const isRecent = (!isInProgress) && isWithinTwoWeeks(writtenDate);
 
-          const blog_chip = <li key={post.id} className={styles.post}>
-              <h3 className={styles.postTitle}>
-                  <Text title={post.properties?.Title?.title} />
-                  {isInProgress?<p className={styles.upcoming}>Upcoming</p>:<p className={styles.recent}>{isRecentlyReleased  && "RECENT RELEASE"}</p>}
-                  {isConfidential && <FaLock className={styles.lockIcon} />}
-              </h3>
-              <p className={styles.summary}>{post.properties.Summary?.rich_text[0]?.plain_text}</p>
-              <div className={styles.cardInfoGroup}>
-                <p className={styles.postDescription}>{date}</p>
-              </div>
-            </li>
+          const blogChip = (
+          <li key={post.id} className={styles.post}>
+            <h3 className={styles.postTitle}>
+                <Text title={post.properties?.Title?.title} />
+                {isInProgress ? <p className={styles.upcoming}>Upcoming</p> : 
+                <p className={styles.recent}>{isRecent && 'RECENT RELEASE'}</p>}
+                {isConfidential && <FaLock className={styles.lockIcon} />}
+            </h3>
+            <p className={styles.summary}>{post.properties.Summary?.rich_text[0]?.plain_text}</p>
+            <div className={styles.cardInfoGroup}>
+              <p className={styles.postDescription}>{date}</p>
+            </div>
+          </li>
+          );
 
-          return (isInProgress ?blog_chip: <Link href={`/article/${slug}`} key={index}>{blog_chip}</Link>);
+          return (isInProgress ? blogChip : <Link href={`/article/${slug}`} key={index}>{blogChip}</Link>);
         })}
       </ol>
 
