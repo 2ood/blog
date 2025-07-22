@@ -13,13 +13,7 @@ import CommentSection from '../../../components/CommentSection/commentSection';
 import PasscodeWrapper from '../../../components/PasscodeGate/PasscodeWrapper';
 import styles from '../../../styles/post.module.css';
 
-export async function generateStaticParams() {
-  const database = await getDatabase();
-  return database?.map((page) => {
-    const slug = page.properties.Slug?.formula?.string;
-    return { params: { slug } };
-  });
-}
+export const revalidate = 300;
 
 export default async function Page({ params }) {
   if (!params || typeof params?.slug !== 'string') return notFound();
