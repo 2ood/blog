@@ -93,7 +93,7 @@ export default async function Page({ params }) {
           </li>
           );
 
-          return (isInProgress ? postChip : <Link href={`/article/${slug}`} key={index}>{postChip}</Link>);
+          return (isInProgress ? postChip : <Link href={`/article/${slug}`} key={index} className={styles.hovering}>{postChip}</Link>);
         })}
       </ol>
 

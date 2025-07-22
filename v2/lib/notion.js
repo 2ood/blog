@@ -151,13 +151,13 @@ export async function getAdjacentArticles(currentSlug) {
   const nextPage = await getPageFromSlug(String(slugNum + 1));
 
   return {
-    prev: prevPage
+    prev: (prevPage && prevPage.properties?.Status.status.name !== 'In progress')
       ? {
         title: prevPage.properties.Title?.title?.[0]?.plain_text || `Article ${slugNum - 1}`,
         slug: String(slugNum - 1),
       }
       : null,
-    next: nextPage
+    next: (nextPage && nextPage.properties?.Status.status.name !== 'In progress')
       ? {
         title: nextPage.properties.Title?.title?.[0]?.plain_text || `Article ${slugNum + 1}`,
         slug: String(slugNum + 1),
