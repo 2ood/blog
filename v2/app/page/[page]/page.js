@@ -8,12 +8,8 @@ import { FaLock } from 'react-icons/fa';
 
 const POSTS_PER_PAGE = parseInt(process.env.POSTS_PER_PAGE || '5', 10);
 
-export async function generateStaticParams() {
-  const { totalPages } = await getPaginatedPosts(1, POSTS_PER_PAGE);
-  return Array.from({ length: totalPages }).map((_, i) => ({
-    page: String(i + 1),
-  }));
-}
+export const revalidate = 300;
+
 
 function getPaginationRange(current, total, delta = 2) {
   const range = [];
@@ -82,7 +78,7 @@ export default async function Page({ params }) {
           const isInProgress = post.properties?.Status.status.name === 'In progress';
           const isRecent = (!isInProgress) && isWithinTwoWeeks(writtenDate);
 
-          const blogChip = (
+          const postChip = (
           <li key={post.id} className={styles.post}>
             <h3 className={styles.postTitle}>
                 <Text title={post.properties?.Title?.title} />
@@ -97,7 +93,7 @@ export default async function Page({ params }) {
           </li>
           );
 
-          return (isInProgress ? blogChip : <Link href={`/article/${slug}`} key={index}>{blogChip}</Link>);
+          return (isInProgress ? postChip : <Link href={`/article/${slug}`} key={index}>{postChip}</Link>);
         })}
       </ol>
 
