@@ -3,9 +3,7 @@ import { Fragment } from 'react';
 import Head from 'next/head';
 import { notFound } from 'next/navigation';
 
-import {
-  getDatabase, getBlocks, getPageFromSlug, getAdjacentArticles,
-} from '../../../lib/notion';
+import { getBlocks, getPageFromSlug, getAdjacentArticles, } from '../../../lib/notion';
 import Text from '../../../components/text';
 import { renderBlock } from '../../../components/notion/renderer';
 import ArticleNav from '../../../components/ArticleNav/ArticleNav';
@@ -14,6 +12,7 @@ import PasscodeWrapper from '../../../components/PasscodeGate/PasscodeWrapper';
 import styles from '../../../styles/post.module.css';
 
 export const revalidate = 300;
+
 
 export default async function Page({ params }) {
   if (!params || typeof params?.slug !== 'string') return notFound();
