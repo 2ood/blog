@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { getPaginatedPosts } from '../../../lib/notion';
+import { getPostMeta } from '../../../lib/postMeta';
 import Text from '../../../components/text';
 import styles from '../../../styles/index.module.css';
 import { FaLock } from 'react-icons/fa';
@@ -33,23 +34,8 @@ function getPaginationRange(current, total, delta = 2) {
   return range;
 }
 
-function isWithinTwoWeeks(dateString) {
-  const inputDate = new Date(dateString);
-  const today = new Date();
-
-  // Normalize time to avoid issues with hours/min/sec
-  today.setHours(0, 0, 0, 0);
-  inputDate.setHours(0, 0, 0, 0);
-
-  const twoWeeksInMs = 14 * 24 * 60 * 60 * 1000;
-  const timeDifference = today - inputDate;
-
-  // Check if the date is between today and 14 days from now (inclusive)
-  return timeDifference >= 0 && timeDifference <= twoWeeksInMs;
-}
-
 export default async function Page({ params }) {
-  const currentPage = parseInt(params.page, 10) || 1;
+  const currentPage = parseInt((await params).page, 10) || 1;
 
   const { posts, totalPages } = await getPaginatedPosts(currentPage, POSTS_PER_PAGE);
   const range = getPaginationRange(currentPage, totalPages);
@@ -66,34 +52,36 @@ export default async function Page({ params }) {
         )
       </h2>
       <ol className={styles.posts}>
-        {posts.map((post, index) => {      
-          const date = new Date(post.properties?.Written.date.start).toLocaleString('en-US', {
+        {posts.map((post) => {
+          const meta = getPostMeta(post);
+          const date = new Date(meta.written).toLocaleString('en-US', {
             month: 'short',
             day: '2-digit',
             year: 'numeric',
           });
-          const slug = post.properties?.Slug?.rich_text?.[0]?.text?.content;
-          const writtenDate = post.properties?.Written.date.start;
-          const isConfidential = post.properties?.Status.status.name === 'Confidential';
-          const isInProgress = post.properties?.Status.status.name === 'In progress';
-          const isRecent = (!isInProgress) && isWithinTwoWeeks(writtenDate);
 
-          const postChip = (
-          <li key={post.id} className={styles.post}>
-            <h3 className={styles.postTitle}>
-                <Text title={post.properties?.Title?.title} />
-                {isInProgress ? <p className={styles.upcoming}>Upcoming</p> : 
-                <p className={styles.recent}>{isRecent && 'RECENT RELEASE'}</p>}
-                {isConfidential && <FaLock className={styles.lockIcon} />}
-            </h3>
-            <p className={styles.summary}>{post.properties.Summary?.rich_text[0]?.plain_text}</p>
-            <div className={styles.cardInfoGroup}>
-              <p className={styles.postDescription}>{date}</p>
-            </div>
-          </li>
+          const card = (
+            <>
+              <h3 className={styles.postTitle}>
+                <Text title={meta.title} />
+                {meta.isUpcoming && <span className={styles.upcoming}>Upcoming</span>}
+                {meta.isNew && <span className={styles.recent}>RECENT RELEASE</span>}
+                {meta.isConfidential && <FaLock className={styles.lockIcon} />}
+              </h3>
+              <p className={styles.summary}>{meta.summary}</p>
+              <div className={styles.cardInfoGroup}>
+                <p className={styles.postDescription}>{date}</p>
+              </div>
+            </>
           );
 
-          return (isInProgress ? postChip : <Link href={`/article/${slug}`} key={index} className={styles.hovering}>{postChip}</Link>);
+          return (
+            <li key={post.id} className={meta.isPublished ? styles.hovering : undefined}>
+              {meta.isPublished
+                ? <Link href={`/article/${meta.slug}`} className={styles.post}>{card}</Link>
+                : <div className={styles.post}>{card}</div>}
+            </li>
+          );
         })}
       </ol>
 

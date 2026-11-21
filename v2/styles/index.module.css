@@ -29,6 +29,8 @@
   gap: 1.5rem;
 }
 .post {
+  display: block;
+  color: inherit;
   background-color: #fff;
   padding: 1.5rem;
   border-radius: 10px;
@@ -170,21 +172,22 @@
   100% { transform: rotate(360deg); }
 }
 
-/* ===== Theme Support via Class ===== */
+/* ===== Theme Support via Class =====
+   :global() is required: in a CSS module a bare .dark would be renamed and never match. */
 
-.dark .post {
+:global(.dark) .post {
   background-color: #1e1e24;
   box-shadow: 0 4px 12px rgba(255, 255, 255, 0.06);
 }
 
-.dark .postTitle {
-  color: var(--bg-color)
+:global(.dark) .postTitle {
+  color: var(--text-color)
 }
 
-.dark .postDescription {
-  color: var(--bg-color)
+:global(.dark) .postDescription {
+  color: var(--text-color)
 }
-.dark .spinner {
+:global(.dark) .spinner {
   border: 4px solid #444;
   border-top: 4px solid #eee;
 }
