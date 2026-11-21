@@ -41,8 +41,22 @@
 
 
 .back {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--text-color);
+  color: var(--text-color);
+  font-size: 1.15rem;
   margin-bottom: 20px;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.back:hover {
+  background-color: var(--text-color);
+  color: var(--bg-color);
 }
 
 .bold {
@@ -192,15 +206,15 @@
   margin: 1.5rem 0;
 }
 
-@media (prefers-color-scheme: dark) {
-  .code,
-  .table,
-  .pre {
-    background-color: rgb(15, 8, 28);
-  }
-  .file:hover {
-    background: rgba(255, 255, 255, 0.1);
-    cursor: pointer;
-    border-radius: 2px;
-  }
+/* Follow the site's theme toggle (.dark on <html>), not the OS setting */
+:global(.dark) .code,
+:global(.dark) .table,
+:global(.dark) .table th,
+:global(.dark) .pre {
+  background-color: rgb(15, 8, 28);
+}
+:global(.dark) .file:hover {
+  background: rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+  border-radius: 2px;
 }
