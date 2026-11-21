@@ -1,18 +1,34 @@
+import styles from '../styles/post.module.css';
+
 export default function Text({ title }) {
   if (!title) {
     return null;
   }
-  return title.map((value) => {
+  // plain_text/href exist on every rich_text type (text, mention, equation);
+  // `text` only exists on type "text".
+  return title.map((value, i) => {
     const {
-      annotations: { color },
-      text,
+      annotations: {
+        bold, italic, strikethrough, underline, code, color,
+      },
+      plain_text: content,
+      href,
     } = value;
+    const className = [
+      bold && styles.bold,
+      italic && styles.italic,
+      strikethrough && styles.strikethrough,
+      underline && styles.underline,
+      code && styles.code,
+    ].filter(Boolean).join(' ') || undefined;
     return (
       <span
-        style={color !== 'default' ? { color } : {}}
-        key={text.content}
+        className={className}
+        style={color && color !== 'default' ? { color } : {}}
+        // eslint-disable-next-line react/no-array-index-key
+        key={i}
       >
-        {text.link ? <a href={text.link.url}>{text.content}</a> : text.content}
+        {href ? <a href={href}>{content}</a> : content}
       </span>
     );
   });

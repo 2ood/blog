@@ -1,5 +1,6 @@
 import { Client } from '@notionhq/client';
 import { cache } from 'react';
+import { getPostMeta, plainText } from './postMeta';
 
 export const revalidate = 3600; // revalidate the data at most every hour
 
@@ -21,9 +22,12 @@ function getRandomInt(minimum, maximum) {
 
 const notion = new Client({
   auth: process.env.NOTION_TOKEN,
+  // Use the platform fetch instead of the SDK's bundled node-fetch,
+  // which calls the deprecated url.parse() (DEP0169).
+  fetch: (...args) => fetch(...args),
 });
 
-export async function getDatabase() {
+export const getDatabase = cache(async () => {
   const results = [];
   let hasMore = true;
   let cursor;
@@ -48,7 +52,7 @@ export async function getDatabase() {
   }
 
   return results;
-}
+});
 
 export const getPage = cache(async (pageId) => {
   const response = await notion.pages.retrieve({ page_id: pageId });
@@ -60,10 +64,8 @@ export const getPageFromSlug = cache(async (slug) => {
     database_id: databaseId,
     filter: {
       property: 'Slug',
-      formula: {
-        string: {
-          equals: slug,
-        },
+      rich_text: {
+        equals: slug,
       },
     }
   });
@@ -73,13 +75,38 @@ export const getPageFromSlug = cache(async (slug) => {
   return null;
 });
 
+// Returns { page, meta } only for posts that may be read (Published / Confidential).
+export const getReadablePost = cache(async (slug) => {
+  if (typeof slug !== 'string' || !slug) return null;
+  const page = await getPageFromSlug(slug);
+  if (!page) return null;
+  const meta = getPostMeta(page);
+  return meta.isPublished ? { page, meta } : null;
+});
+
+const LINE_BREAK = {
+  type: 'text',
+  text: { content: '\n', link: null },
+  annotations: { color: 'default' },
+  plain_text: '\n',
+  href: null,
+};
+
 export const getBlocks = cache(async (blockID) => {
   const blockId = blockID.replaceAll('-', '');
 
-  const { results } = await notion.blocks.children.list({
-    block_id: blockId,
-    page_size: 100,
-  });
+  const results = [];
+  let cursor;
+  do {
+    // eslint-disable-next-line no-await-in-loop
+    const response = await notion.blocks.children.list({
+      block_id: blockId,
+      page_size: 100,
+      start_cursor: cursor,
+    });
+    results.push(...response.results);
+    cursor = response.has_more ? response.next_cursor : undefined;
+  } while (cursor);
 
   // 재귀적으로 모든 자식 블록 가져오기
   const childBlocks = await Promise.all(results.map(async (block) => {
@@ -129,7 +156,8 @@ export const getBlocks = cache(async (blockID) => {
       && prev?.type === 'quote'
       && curr.paragraph?.rich_text?.length > 0
     ) {
-      prev.quote.rich_text.push(...curr.paragraph.rich_text);
+      // Line break between the merged paragraphs; rendered via white-space: pre-line.
+      prev.quote.rich_text.push(LINE_BREAK, ...curr.paragraph.rich_text);
     }
 
     // ✔️ 그 외 일반 블록
@@ -141,33 +169,21 @@ export const getBlocks = cache(async (blockID) => {
   return merged;
 });
 
-// lib/notion.js
-
+// Prev = the next-older readable post, Next = the next-newer one (by Written date).
 export async function getAdjacentArticles(currentSlug) {
-  const slugNum = parseInt(currentSlug, 10);
-  if (Number.isNaN(slugNum)) return { prev: null, next: null };
+  const readable = (await getDatabase()).map((p) => getPostMeta(p)).filter((m) => m.isPublished);
+  const index = readable.findIndex((m) => m.slug === currentSlug);
+  if (index === -1) return { prev: null, next: null };
 
-  const prevPage = await getPageFromSlug(String(slugNum - 1));
-  const nextPage = await getPageFromSlug(String(slugNum + 1));
-
+  const toNav = (m) => (m ? { title: m.titleText, slug: m.slug } : null);
   return {
-    prev: (prevPage && prevPage.properties?.Status.status.name !== 'In progress')
-      ? {
-        title: prevPage.properties.Title?.title?.[0]?.plain_text || `Article ${slugNum - 1}`,
-        slug: String(slugNum - 1),
-      }
-      : null,
-    next: (nextPage && nextPage.properties?.Status.status.name !== 'In progress')
-      ? {
-        title: nextPage.properties.Title?.title?.[0]?.plain_text || `Article ${slugNum + 1}`,
-        slug: String(slugNum + 1),
-      }
-      : null,
+    prev: toNav(readable[index + 1]),
+    next: toNav(readable[index - 1]),
   };
 }
 
 export async function getPaginatedPosts(pageNumber, pageSize) {
-  const allPosts = await getDatabase(); // 이미 정렬된 상태라면 OK
+  const allPosts = (await getDatabase()).filter((p) => getPostMeta(p).isListed);
   const start = (pageNumber - 1) * pageSize;
   const paginated = allPosts.slice(start, start + pageSize);
 
@@ -199,14 +215,18 @@ export async function getComments(slug) {
     ],
   });
 
-  console.log(response.results);
-
   return response.results.map((page) => ({
     id: page.id,
-    name: page.properties.name?.rich_text?.[0]?.plain_text || 'Anonymous',
-    content: page.properties.content?.rich_text?.[0]?.plain_text || '',
+    name: plainText(page.properties.name?.rich_text) || 'Anonymous',
+    content: plainText(page.properties.content?.rich_text),
     createdAt: page.created_time,
   }));
+}
+
+// Notion caps each rich_text item at 2000 characters.
+function toRichText(str) {
+  const chunks = str.match(/[\s\S]{1,2000}/g) || [];
+  return chunks.map((content) => ({ text: { content } }));
 }
 
 export async function postComment({ slug, name, content }) {
@@ -219,10 +239,10 @@ export async function postComment({ slug, name, content }) {
         title: [{ text: { content: slug } }],
       },
       name: {
-        rich_text: [{ text: { content: name } }],
+        rich_text: toRichText(name),
       },
       content: {
-        rich_text: [{ text: { content } }],
+        rich_text: toRichText(content),
       },
     },
   });

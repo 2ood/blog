@@ -1,7 +1,9 @@
+/* eslint-disable import/prefer-default-export */
 import { Fragment } from 'react';
 import Link from 'next/link';
 
 import Text from '../text';
+import { plainText } from '../../lib/postMeta';
 import styles from '../../styles/post.module.css';
 
 export function renderBlock(block) {
@@ -44,8 +46,9 @@ export function renderBlock(block) {
       return (
         <li key={block.id}>
           <Text title={value.rich_text} />
-          {/* eslint-disable-next-line no-use-before-define */}
-          {!!value.children && renderNestedList(block)}
+          {block.children?.map((child) => (
+            <Fragment key={child.id}>{renderBlock(child)}</Fragment>
+          ))}
         </li>
       );
     case 'to_do':
@@ -78,7 +81,7 @@ export function renderBlock(block) {
       );
     case 'image': {
       const src = value.type === 'external' ? value.external.url : value.file.url;
-      const caption = value.caption ? value.caption[0]?.plain_text : '';
+      const caption = plainText(value.caption);
       // eslint-disable-next-line @next/next/no-img-element
       return (
         <figure>
@@ -89,22 +92,17 @@ export function renderBlock(block) {
     }
     case 'divider':
       return <hr key={id} />;
-      case 'quote':
-          return (
-            <blockquote key={id}>
-              {value.rich_text.map((text, i) => (
-                <Fragment key={i}>
-                  {text.plain_text}
-                  {i < value.rich_text.length - 1 && <br />}
-                </Fragment>
-              ))}
-            </blockquote>
-          );
+    case 'quote':
+      return (
+        <blockquote key={id}>
+          <Text title={value.rich_text} />
+        </blockquote>
+      );
     case 'code':
       return (
         <pre className={styles.pre}>
           <code className={styles.code_block} key={id}>
-            {value.rich_text[0].plain_text}
+            {plainText(value.rich_text)}
           </code>
         </pre>
       );
@@ -112,7 +110,7 @@ export function renderBlock(block) {
       const srcFile = value.type === 'external' ? value.external.url : value.file.url;
       const splitSourceArray = srcFile.split('/');
       const lastElementInArray = splitSourceArray[splitSourceArray.length - 1];
-      const captionFile = value.caption ? value.caption[0]?.plain_text : '';
+      const captionFile = plainText(value.caption);
       return (
         <figure>
           <div className={styles.file}>
@@ -168,7 +166,7 @@ export function renderBlock(block) {
     case 'video': {
       let videoSrc =
         value.type === 'external' ? value.external.url : value.file.url;
-      const caption = value.caption?.[0]?.plain_text;
+      const caption = plainText(value.caption);
 
       const youtubeMatch = videoSrc.match(/^https:\/\/youtu\.be\/([\w-]+)/);
       if (youtubeMatch) {
@@ -208,17 +206,4 @@ export function renderBlock(block) {
         type === 'unsupported' ? 'unsupported by Notion API' : type
       })`;
   }
-}
-
-export function renderNestedList(blocks) {
-  const { type } = blocks;
-  const value = blocks[type];
-  if (!value) return null;
-
-  const isNumberedList = value.children[0].type === 'numbered_list_item';
-
-  if (isNumberedList) {
-    return <ol>{value.children.map((block) => renderBlock(block))}</ol>;
-  }
-  return <ul>{value.children.map((block) => renderBlock(block))}</ul>;
 }
