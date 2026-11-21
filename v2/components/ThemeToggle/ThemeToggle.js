@@ -8,10 +8,8 @@ export default function ThemeToggle() {
   const [theme, setTheme] = useState('light');
 
   useEffect(() => {
-    const stored = localStorage.getItem('theme');
-    const preferred = stored || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-    setTheme(preferred);
-    document.documentElement.classList.add(preferred);
+    // The inline script in app/layout.js has already applied the theme class.
+    setTheme(document.documentElement.classList.contains('dark') ? 'dark' : 'light');
   }, []);
 
   const toggleTheme = () => {
