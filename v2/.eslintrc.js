@@ -1,4 +1,5 @@
 module.exports = {
+  ignorePatterns: ['.next/', 'node_modules/'],
   env: {
     browser: true,
     es2021: true,
@@ -35,7 +36,7 @@ module.exports = {
 
     // 💥 린트 오류 방지용 추가
     'eol-last': 'off',
-    'indent': 'off',
+    indent: 'off',
     'no-trailing-spaces': 'off',
     'no-plusplus': 'off',
     'no-console': 'off',
