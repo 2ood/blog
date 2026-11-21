@@ -22,7 +22,7 @@ export default function PasscodeGate({ onAccessGranted, slug }) {
 
       const data = await res.json();
       if (data.valid) {
-        onAccessGranted();
+        onAccessGranted(data);
       } else {
         setError('Incorrect passcode.');
       }

@@ -1,28 +1,36 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import styles from './commentSection.module.css';
 
-export default function CommentSection({ slug }) {
+const authHeaders = (token) => (token ? { Authorization: `Bearer ${token}` } : {});
+
+// `token` is required for confidential articles (issued by /api/check-passcode).
+export default function CommentSection({ slug, token }) {
   const [comments, setComments] = useState([]);
   const [name, setName] = useState('');
   const [content, setContent] = useState('');
 
+  const loadComments = useCallback(async () => {
+    const res = await fetch(`/api/comments?slug=${encodeURIComponent(slug)}`, {
+      headers: authHeaders(token),
+    });
+    setComments(res.ok ? await res.json() : []);
+  }, [slug, token]);
+
   useEffect(() => {
-    fetch(`/api/comments?slug=${slug}`)
-      .then((res) => res.json())
-      .then((data) => setComments(data));
-  }, [slug]);
+    loadComments();
+  }, [loadComments]);
 
   const submitComment = async () => {
     if (!content.trim()) return;
     await fetch('/api/comments', {
       method: 'POST',
+      headers: { 'Content-Type': 'application/json', ...authHeaders(token) },
       body: JSON.stringify({ slug, name, content }),
     });
     setContent('');
-    const updated = await fetch(`/api/comments?slug=${slug}`).then((r) => r.json());
-    setComments(updated);
+    await loadComments();
   };
 
   return (

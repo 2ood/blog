@@ -2,13 +2,22 @@
 
 import { useState } from 'react';
 import PasscodeGate from './PasscodeGate';
+import ArticleView from '../ArticleView';
+import CommentSection from '../CommentSection/commentSection';
 
-export default function PasscodeWrapper({ isConfidential, slug, children }) {
-  const [accessGranted, setAccessGranted] = useState(!isConfidential);
+// Blocks and the comments token arrive only from /api/check-passcode after a correct passcode.
+export default function PasscodeWrapper({ slug, header, nav }) {
+  const [access, setAccess] = useState(null);
 
-  if (!accessGranted) {
-    return <PasscodeGate onAccessGranted={() => setAccessGranted(true)} slug={slug} />;
-    }
+  if (!access) {
+    return <PasscodeGate onAccessGranted={setAccess} slug={slug} />;
+  }
 
-  return children;
+  const footer = (
+    <>
+      {nav}
+      <CommentSection slug={slug} token={access.token} />
+    </>
+  );
+  return <ArticleView header={header} footer={footer} blocks={access.blocks} />;
 }

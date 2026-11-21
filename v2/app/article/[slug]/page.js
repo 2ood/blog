@@ -1,11 +1,9 @@
 // ✅ app/article/[slug]/page.js
-import { Fragment } from 'react';
-import Head from 'next/head';
 import { notFound } from 'next/navigation';
 
-import { getBlocks, getPageFromSlug, getAdjacentArticles, } from '../../../lib/notion';
+import { getBlocks, getReadablePost, getAdjacentArticles, } from '../../../lib/notion';
 import Text from '../../../components/text';
-import { renderBlock } from '../../../components/notion/renderer';
+import ArticleView from '../../../components/ArticleView';
 import ArticleNav from '../../../components/ArticleNav/ArticleNav';
 import CommentSection from '../../../components/CommentSection/commentSection';
 import PasscodeWrapper from '../../../components/PasscodeGate/PasscodeWrapper';
@@ -13,48 +11,57 @@ import styles from '../../../styles/post.module.css';
 
 export const revalidate = 300;
 
+export async function generateMetadata({ params }) {
+  const { slug } = await params;
+  const post = await getReadablePost(slug);
+  if (!post) return {};
+  return {
+    title: post.meta.titleText,
+    description: post.meta.summary || undefined,
+  };
+}
 
 export default async function Page({ params }) {
-  if (!params || typeof params?.slug !== 'string') return notFound();
+  const { slug } = await params;
 
-  const page = await getPageFromSlug(params?.slug);
-  if (!page) return notFound();
+  const post = await getReadablePost(slug);
+  if (!post) return notFound();
+  const { page, meta } = post;
 
-  const blocks = await getBlocks(page.id);
-  if (!blocks || !blocks.length) return notFound();
+  const { prev, next } = await getAdjacentArticles(slug);
 
-  const { prev, next } = await getAdjacentArticles(params.slug);
-
-  const isConfidential = page.properties?.Status.status.name === 'Confidential';
-  const date = new Date(page.properties?.Written.date.start).toLocaleString('en-US', {
+  const date = new Date(meta.written).toLocaleString('en-US', {
     month: 'short',
     day: '2-digit',
     year: 'numeric',
   });
-  
-  return (
-    <PasscodeWrapper isConfidential={isConfidential} slug={params?.slug}>
-      <Head>
-        <title>{page.properties.Title?.title[0].plain_text}</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
 
-      <article className={styles.container}>
-        <h1 className={styles.title}>
-          <Text title={page.properties.Title?.title} />
-        </h1>
-        <div className={styles.postInfoGroup}>
-          <p>{date}</p>
-          <p className={styles.summary}>{page.properties.Summary?.rich_text[0]?.plain_text}</p>
-        </div>
-        <section>
-          {blocks.map((block) => (
-            <Fragment key={block.id}>{renderBlock(block)}</Fragment>
-          ))}
-        </section>
-      </article>
-      <ArticleNav prev={prev} next={next} />
-      <CommentSection slug={params?.slug} />
-    </PasscodeWrapper>
+  const header = (
+    <>
+      <h1 className={styles.title}>
+        <Text title={meta.title} />
+      </h1>
+      <div className={styles.postInfoGroup}>
+        <p>{date}</p>
+        <p className={styles.summary}>{meta.summary}</p>
+      </div>
+    </>
   );
+  const nav = <ArticleNav prev={prev} next={next} />;
+
+  if (meta.isConfidential) {
+    return <PasscodeWrapper slug={slug} header={header} nav={nav} />;
+  }
+
+  const footer = (
+    <>
+      {nav}
+      <CommentSection slug={slug} />
+    </>
+  );
+
+  const blocks = await getBlocks(page.id);
+  if (!blocks || !blocks.length) return notFound();
+
+  return <ArticleView header={header} footer={footer} blocks={blocks} />;
 }
